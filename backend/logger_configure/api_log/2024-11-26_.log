@@ -529,3 +529,32 @@ new_text2024-11-26 12:06:38,763 - my_logger - INFO -  decoding token data
 2024-11-26 17:39:16,171 - my_logger - INFO - {'email': 'nandhakumarselva2000@gmail.com', 'username': 'nandha', 'password': '12345897', 'confirm_password': '12345897', 'role': 'user'}
 2024-11-26 17:39:17,103 - my_logger - INFO - register route 
 2024-11-26 17:39:17,103 - my_logger - INFO - {'email': 'nandhakumarselva2000@gmail.com', 'username': 'nandha', 'password': '12345897', 'confirm_password': '12345897', 'role': 'user'}
+2024-11-26 18:03:08,779 - my_logger - INFO - register route 
+2024-11-26 18:03:08,780 - my_logger - INFO - {'email': 'nandhakumarselva2000@gmail.com', 'username': 'nandha', 'password': '1234567890', 'confirm_password': '1234567890', 'role': 'user'}
+2024-11-26 18:03:08,781 - my_logger - INFO - Email: nandhakumarselva2000@gmail.com, Username: nandha, Role: user
+2024-11-26 18:03:08,781 - my_logger - INFO -  hashingh password 
+2024-11-26 18:03:08,983 - my_logger - INFO - b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'
+2024-11-26 18:03:08,983 - my_logger - INFO - generating token 
+2024-11-26 18:03:08,983 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>}
+2024-11-26 18:03:08,983 - my_logger - INFO - expiration time - 2024-11-26 18:05:08.983557
+2024-11-26 18:03:08,983 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzMyNjI0NTA4fQ.MT4mZU0JaVNFylOaDkK3ETzR6ewy8YuVKQTJns9DDww
+2024-11-26 18:03:08,983 - my_logger - INFO - generating token 
+2024-11-26 18:03:08,983 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>}
+2024-11-26 18:03:08,983 - my_logger - INFO - expiration time - 2024-11-26 19:03:08.983751
+2024-11-26 18:03:08,983 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzMyNjI3OTg4fQ.Mmi8-mr6r6Ly9fcYgLaQYhhbNdfA0elYO5hzepfJEzs
+2024-11-26 18:08:39,749 - my_logger - INFO - generating token 
+2024-11-26 18:08:39,749 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>}
+2024-11-26 18:08:39,749 - my_logger - INFO - expiration time - 2024-11-26 18:10:39.749041
+2024-11-26 18:08:39,749 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzMyNjI0ODM5fQ.AZm0tHBfYpYghaRwqYkwzHtAyXPMX2sdJpRlhW3_kUo
+2024-11-26 18:08:39,749 - my_logger - INFO - generating token 
+2024-11-26 18:08:39,749 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>}
+2024-11-26 18:08:39,749 - my_logger - INFO - expiration time - 2024-11-26 19:08:39.749562
+2024-11-26 18:08:39,749 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzMyNjI4MzE5fQ.xz6UeicmPeTE7MmRpNaREaHRKwG5Tc2WzHRYBOgNpNM
+2024-11-26 18:09:23,817 - my_logger - INFO - generating token 
+2024-11-26 18:09:23,817 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>}
+2024-11-26 18:09:23,818 - my_logger - INFO - expiration time - 2024-11-26 18:11:23.817846
+2024-11-26 18:09:23,818 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzMyNjI0ODgzfQ.UVx3xTz34pswRVQWNNhjUJ0gDm9uOzUyxKqAvpdHxvI
+2024-11-26 18:09:23,818 - my_logger - INFO - generating token 
+2024-11-26 18:09:23,818 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>}
+2024-11-26 18:09:23,818 - my_logger - INFO - expiration time - 2024-11-26 19:09:23.818186
+2024-11-26 18:09:23,818 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzMyNjI4MzYzfQ.s4mZRcwgHBHHxgjkFSm2Q7UtZNLcnIz9gBBF3__fsgI

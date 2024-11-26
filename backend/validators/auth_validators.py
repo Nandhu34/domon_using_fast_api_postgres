@@ -20,8 +20,10 @@ class register_validator(BaseModel):
 
 
 
-
-
+class login_validator(BaseModel):
+    email:EmailStr
+    password:str = Field(min_length=8, max_length=15)
+    role:role_enum
 
 # data ={
 #     "email":"nandhakumarselva2000@gmail.com"

@@ -19,6 +19,25 @@ def handle_400_error(   error):
     return jsonify(response), 422
 
 
+@app.errorhandler(404)
+def handle_400_error(   error):
+    response = {
+        "status": "error",
+        "error_message": error.description, 
+        
+    }
+    return jsonify(response), 404
+
+
+@app.errorhandler(401)
+def handle_400_error(   error):
+    response = {
+        "status": "error",
+        "error_message": error.description, 
+        
+    }
+    return jsonify(response), 401
+
 if __name__ == '__main__':
 
     app.run(debug= True , port= config.port)
