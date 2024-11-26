@@ -4,15 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 import Header from '../components/header'
-import Login from '../pages/registerPage';
+import Register from '../pages/registerPage';
+import Login from '../pages/loginPage';
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} /> */}
-        
+        <Route path="/register" element={<Register />} />        
       </Routes>
     </Router>
   );
