@@ -19,3 +19,9 @@ port =5003
 # hashing 
 rounds = 12
 encode_algo = "utf-8"
+token_for_sending_email = "xlmj qglk xedy olqg"
+mail_sending_email = "whoisdomon@gmail.com"
+user_email ='nandhakumarselva2000@gmail.com'
+
+# mail_sending_email='nandhakumarselva2000@gmail.com'
+# token_for_sending_email='qrxt eswh wlvh timq'

@@ -1,0 +1,55 @@
+new_text2024-11-27 11:13:51,175 - my_logger - INFO - generating token 
+2024-11-27 11:13:51,175 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'}
+2024-11-27 11:13:51,175 - my_logger - INFO - expiration time - 2024-11-27 11:18:51.175000
+2024-11-27 11:13:51,175 - my_logger - CRITICAL - error at creating token
+2024-11-27 11:13:51,175 - my_logger - ERROR - error : Object of type bytes is not JSON serializable
+2024-11-27 11:13:51,175 - my_logger - INFO -  sending mail 
+2024-11-27 11:14:37,694 - my_logger - INFO - generating token 
+2024-11-27 11:14:37,694 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'"}
+2024-11-27 11:14:37,694 - my_logger - INFO - expiration time - 2024-11-27 11:19:37.694389
+2024-11-27 11:14:37,695 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRBS21TUWl4d2g0L1FTcnNZdk9pTXplWnUzSnMvSkxSQXltNHNyMFI1UjRHSnM5Y2ZtM2g3SyciLCJleHAiOjE3MzI2ODY1Nzd9.OwW47drTBwK8UqBRi_iZZWPmCX51pWD0Ogss0nO8HXE
+2024-11-27 11:14:37,695 - my_logger - INFO -  sending mail 
+2024-11-27 11:16:25,218 - my_logger - INFO - generating token 
+2024-11-27 11:16:25,218 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'"}
+2024-11-27 11:16:25,218 - my_logger - INFO - expiration time - 2024-11-27 11:21:25.218694
+2024-11-27 11:16:25,219 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRBS21TUWl4d2g0L1FTcnNZdk9pTXplWnUzSnMvSkxSQXltNHNyMFI1UjRHSnM5Y2ZtM2g3SyciLCJleHAiOjE3MzI2ODY2ODV9.lLf-ska7Zys1PcU6xG0FO4fsmkGO28mx9uZE8O31rW4
+2024-11-27 11:16:25,219 - my_logger - INFO -  sending mail 
+2024-11-27 11:18:48,622 - my_logger - INFO - generating token 
+2024-11-27 11:18:48,622 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'"}
+2024-11-27 11:18:48,622 - my_logger - INFO - expiration time - 2024-11-27 11:23:48.622401
+2024-11-27 11:18:48,622 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRBS21TUWl4d2g0L1FTcnNZdk9pTXplWnUzSnMvSkxSQXltNHNyMFI1UjRHSnM5Y2ZtM2g3SyciLCJleHAiOjE3MzI2ODY4Mjh9.ODCzh1IBCiW3oUxb2pt6kY9s1iEJbY9GVNtJPu4l9BM
+2024-11-27 11:18:48,622 - my_logger - INFO -  sending mail 
+2024-11-27 11:53:16,440 - my_logger - INFO - generating token 
+2024-11-27 11:53:16,441 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'"}
+2024-11-27 11:53:16,441 - my_logger - INFO - expiration time - 2024-11-27 11:58:16.440799
+2024-11-27 11:53:16,441 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRBS21TUWl4d2g0L1FTcnNZdk9pTXplWnUzSnMvSkxSQXltNHNyMFI1UjRHSnM5Y2ZtM2g3SyciLCJleHAiOjE3MzI2ODg4OTZ9.PHUnEX3cq3f3-T23677G4AptEdfqu9c-akInKobRX2M
+2024-11-27 11:53:16,441 - my_logger - INFO -  sending mail 
+2024-11-27 11:53:41,773 - my_logger - INFO -  url has been updated in db 
+2024-11-27 11:56:11,085 - my_logger - INFO - generating token 
+2024-11-27 11:56:11,085 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'"}
+2024-11-27 11:56:11,085 - my_logger - INFO - expiration time - 2024-11-27 12:01:11.084970
+2024-11-27 11:56:11,085 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRBS21TUWl4d2g0L1FTcnNZdk9pTXplWnUzSnMvSkxSQXltNHNyMFI1UjRHSnM5Y2ZtM2g3SyciLCJleHAiOjE3MzI2ODkwNzF9.etFUxbAadgdWpgeghrpUFturBIIIh3545fGe4af8zFc
+2024-11-27 11:56:36,067 - my_logger - INFO - generating token 
+2024-11-27 11:56:36,067 - my_logger - INFO - payload - {'email': 'nandhakumarselva2000@gmail.com', 'role': <role_enum.user: 'user'>, 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'"}
+2024-11-27 11:56:36,067 - my_logger - INFO - expiration time - 2024-11-27 12:01:36.067285
+2024-11-27 11:56:36,067 - my_logger - INFO - Generated JWT token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmRoYWt1bWFyc2VsdmEyMDAwQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRBS21TUWl4d2g0L1FTcnNZdk9pTXplWnUzSnMvSkxSQXltNHNyMFI1UjRHSnM5Y2ZtM2g3SyciLCJleHAiOjE3MzI2ODkwOTZ9.vNBiL7ZhZKBYwWOECUIG6gVD293qB1mpWZCEns8NwGU
+2024-11-27 11:56:36,067 - my_logger - INFO -  sending mail 
+2024-11-27 11:57:00,681 - my_logger - INFO -  url has been updated in db 
+2024-11-27 11:57:47,901 - my_logger - INFO -  checking token expired ot not 
+2024-11-27 11:57:47,901 - my_logger - INFO - expiration time - 1732689096
+2024-11-27 11:57:47,901 - my_logger - INFO -  current time - 2024-11-27 11:57:47.901871
+2024-11-27 11:57:47,901 - my_logger - INFO -  token is not expired 
+2024-11-27 11:57:47,902 - my_logger - INFO -  decoding token data 
+2024-11-27 11:57:47,902 - my_logger - INFO - {'email': 'nandhakumarselva2000@gmail.com', 'role': 'user', 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'", 'exp': 1732689096}
+2024-11-27 11:58:25,423 - my_logger - INFO -  checking token expired ot not 
+2024-11-27 11:58:25,423 - my_logger - INFO - expiration time - 1732689096
+2024-11-27 11:58:25,423 - my_logger - INFO -  current time - 2024-11-27 11:58:25.423815
+2024-11-27 11:58:25,423 - my_logger - INFO -  token is not expired 
+2024-11-27 11:58:25,423 - my_logger - INFO -  decoding token data 
+2024-11-27 11:58:25,424 - my_logger - INFO - {'email': 'nandhakumarselva2000@gmail.com', 'role': 'user', 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'", 'exp': 1732689096}
+2024-11-27 11:58:45,594 - my_logger - INFO -  checking token expired ot not 
+2024-11-27 11:58:45,594 - my_logger - INFO - expiration time - 1732689096
+2024-11-27 11:58:45,594 - my_logger - INFO -  current time - 2024-11-27 11:58:45.594390
+2024-11-27 11:58:45,594 - my_logger - INFO -  token is not expired 
+2024-11-27 11:58:45,594 - my_logger - INFO -  decoding token data 
+2024-11-27 11:58:45,594 - my_logger - INFO - {'email': 'nandhakumarselva2000@gmail.com', 'role': 'user', 'password': "b'$2b$12$AKmSQixwh4/QSrsYvOiMzeZu3Js/JLRAym4sr0R5R4GJs9cfm3h7K'", 'exp': 1732689096}

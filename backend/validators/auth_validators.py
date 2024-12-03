@@ -25,6 +25,17 @@ class login_validator(BaseModel):
     password:str = Field(min_length=8, max_length=15)
     role:role_enum
 
+class forget_password_validator (BaseModel):
+    # email:EmailStr 
+    # role:role_enum
+    pass 
+
+
+class reset_password_validator(BaseModel):
+    new_password:str=Field(min_length=8, max_length=15)
+    # email:EmailStr
+    # role:role_enum
+    
 # data ={
 #     "email":"nandhakumarselva2000@gmail.com"
 #     , "username":"nandhahghr",
