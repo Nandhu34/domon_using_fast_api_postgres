@@ -1,6 +1,5 @@
 import React from "react";
-import { TEInput, TERipple } from "tw-elements-react";
-
+import config from '../config'
 export default function Login() {
   return (
     
@@ -49,7 +48,7 @@ export default function Login() {
                 </button>
 
                 <div class="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
-                    <a href="#" class="flex-2 underline">
+                    <a href={`${config.BASE_URL}/forget-password`} class="flex-2 underline">
                         Forgot password?
                     </a>
 
