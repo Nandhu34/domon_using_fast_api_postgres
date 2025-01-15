@@ -54,6 +54,8 @@ function  ForgetPassword()
                 <button type="submit" className="button" onSubmit={(e)=>{}}> get link </button>
 
         </div>
+
+        
         
     </div>
 

@@ -5,17 +5,43 @@ function Register() {
   const [ShowPassword, setShowPassword] = useState(false);
   const [Password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
+  const roles = ["user"];
 
   console.log(Email);
+
+  const handleFormSubmit = (e)=>
+  {
+    const roleValue = document.querySelector('.role_div select').value;
+e.preventDefault();
+
+if (!Email || !Password || !ConfirmPassword || !roleValue) {
+  alert("Please fill out all fields");
+  return;
+}
+
+if (Password !== ConfirmPassword) {
+  alert("Passwords do not match");
+  return;
+
+}
+console.log("Form submitted", {
+
+  // prompt("Enter the super user password ");
+  Email,
+  Password,
+  role: roleValue,
+});
+
+  }
 
   return (
     <>
       <style>
         {`
-          input[type="text"], input[type="password"] {
+          input[type="text"], input[type="password"] , select , option{
             width: 100%;
             max-width: 400px;
-            padding: 4%;
+            padding: 3%;
             margin: 1 auto;
             box-sizing: border-box;
             focus:outline-none;
@@ -61,11 +87,6 @@ function Register() {
             box-sizing: border-box;
           }
 
-          .view-password-checkbox{
-            
-            
-
-               }
 
           .form_container {
             width: 100%;
@@ -80,7 +101,7 @@ function Register() {
             box-sizing: border-box;
             text-align:center;
           }
-
+         
           .aldredy_user_div {
             text-align: center;
             padding-top:30px;
@@ -112,17 +133,21 @@ function Register() {
               font-size: 12px;
             }
           }
+
+
         `}
       </style>
 
       <div className="register-main-div">
-        <div className="form_container">
+        <form  className="form_container"   onSubmit={handleFormSubmit} >
+          
           <b style={{ textAlign: "center" }}>
             <i><u>Register New User</u></i>
           </b>
 
           <div className="email_div">
             <input
+            required
               type="text"
               onChange={(e) => setEmail(e.target.value)}
               value={Email}
@@ -130,8 +155,19 @@ function Register() {
             />
           </div>
 
+          <div className="role_div">
+          <select required>
+            {roles.map((role, index) => (
+              <option key={index} value={role} style={{height:"60px",color:"red"}}>
+                {role}
+              </option>
+            ))}
+          </select>
+        </div>
+
           <div className="password_div">
             <input
+            required
               type={ShowPassword ? 'text' : 'password'}
               placeholder="Enter your password"
               value={Password}
@@ -141,6 +177,7 @@ function Register() {
           
           <div className="conform_password_div">
             <input
+             required
               type={ShowPassword ? 'text' : 'password'}
               placeholder="Confirm your password"
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -168,11 +205,11 @@ function Register() {
           </div>
 
           <div className="submit_button_div" style={{ display: "flex", justifyContent: "center" }}>
-            <button className="submit-button" type="button" onClick={(e) => { e.preventDefault(); console.log("handle click event "); }}>
+            <button className="submit-button" type="submit" >
               Submit
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

@@ -5,8 +5,7 @@ export default function Login() {
     
   
    <>
-<div class="flex flex-col h-screen bg-gray-100">
-   
+   <div class="flex flex-col h-screen bg-gray-100">
     <div class="grid place-items-center mx-2 my-20 sm:my-auto">
         <div class="flex">
             <span class="text-center font-bold my-20 mx-auto">        
@@ -32,6 +31,7 @@ export default function Login() {
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     required />
+                    
                 <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
                 <input id="password" type="password" name="password" placeholder="password" autocomplete="current-password"
                     class="block w-full py-3 px-1 mt-2 mb-4
@@ -39,6 +39,16 @@ export default function Login() {
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     required />
+
+                <label for="role" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Role</label>
+                <select id="role" name="role" class="block w-full py-3 px-1 mt-2 mb-4
+                    text-gray-800 appearance-none 
+                    border-b-2 border-gray-100
+                    focus:text-gray-500 focus:outline-none focus:border-gray-200" required>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                    <option value="superuser">Super User</option>
+                </select>
 
                 <button type="submit"
                     class="w-full py-3 mt-10 bg-gray-800 rounded-sm

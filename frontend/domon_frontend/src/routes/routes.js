@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Routes, Route ,Navigate } from 'react-router-d
 import Header from '../components/header'
 import Register from '../pages/registerPage';
 import Login from '../pages/loginPage';
- import ForgetPassword from '../pages/forgetPassword';
+import ForgetPassword from '../pages/forgetPassword';
+import ResetPassword from '../pages/resetPassword'
 const AppRoutes = () => {
   return (
     <Router>
@@ -15,7 +16,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Navigate to="/login" replace />}  />
         <Route path="/register" element={<Register />} /> 
         <Route path ="/forget-password" element={<ForgetPassword />} />    
-
+        <Route path ="/reset-password/:token" element={<ResetPassword />} /> 
       </Routes>
     </Router>
   );
