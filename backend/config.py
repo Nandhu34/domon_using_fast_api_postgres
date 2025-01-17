@@ -8,8 +8,8 @@ subscription_details_collection = "subscription_details"
 jwt_secret ="domain moniter"
 jwt_algorithm = "HS256"
 # hour basis 
-access_token_expiration_time = 3
-refresh_token_expiration_time = 5
+access_token_expiration_time = 1
+refresh_token_expiration_time = 1
 reset_password_token_expiration_time= 5
 log_folder_name = "api_log"
 host=None 
