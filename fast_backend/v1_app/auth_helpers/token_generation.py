@@ -35,7 +35,7 @@ def create_forget_password_token(payload  ):
     try :
         auth_logger.info  (".....creating new token .....")  
         auth_logger.info(f"paylaod ---- {payload}")       
-        encoded_jwt = jwt.encode({**payload ,"exp":datetime.datetime.utcnow() + datetime.timedelta(minutes=config.exp_time_for_reset_password_token) }, config.secret_key, algorithm=config.jwt_algorithm)
+        encoded_jwt = jwt.encode({**payload ,"exp":datetime.datetime.utcnow() + datetime.timedelta(hours=config.exp_time_for_reset_password_token) }, config.secret_key, algorithm=config.jwt_algorithm)
         return encoded_jwt
     except :
         return False 

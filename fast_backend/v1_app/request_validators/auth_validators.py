@@ -13,8 +13,8 @@ class validate_register_new_user(BaseModel):
     @validator('username')
     def username_length(cls, username):
         print(" checking username ")
-        if not (6 <= len(username) <= 15):
-            raise ValueError('Username must be between 6 and 15 characters')
+        # if not (6 <= len(username) <= 15):
+        #     raise ValueError('Username must be between 6 and 15 characters')
         return username
 
     @validator('password')

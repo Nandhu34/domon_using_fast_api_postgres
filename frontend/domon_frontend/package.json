@@ -3,20 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@headlessui/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
+    "@mui/material": "^6.4.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "js-cookie": "^3.0.5",
     "path-browserify": "^1.0.1",
+    "querystring": "^0.2.1",
     "querystring-es3": "^0.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "tw-elements-react": "^1.0.0-alpha-end",
+    "url": "^0.11.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,6 +54,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
+    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"

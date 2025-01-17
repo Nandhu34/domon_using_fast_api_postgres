@@ -6,6 +6,11 @@ function HomePage()
 {
 
 
-
+return (<>
+<p> welcome home </p></>)
     
 }
+
+
+
+export default HomePage;

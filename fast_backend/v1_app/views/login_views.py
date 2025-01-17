@@ -60,7 +60,7 @@ def register_new_user_view(token_payload):
    acknowledge_for_register = user_details_collection.insert_one(schema_for_new_user)
    if acknowledge_for_register.inserted_id:
        return JSONResponse(
-            content={"message":  "user registered successfully","status": "success"},
+            content={"message":  "user registered successfully","access_token":generated_access_token,"refresh_token":generated_refresh_token,"status": "success"},
             status_code=200
         )
    else:
@@ -113,7 +113,7 @@ def login_user_view(login_payload ):
    ack_for_login = user_details_collection.update_one({"email":login_payload.email, "role":login_payload.role},{"$set":{"access_token":generated_access_token, "refresh_token":generated_refresh_token,"date_of_last_login":datetime.datetime.now().isoformat()}}) 
    if ack_for_login.modified_count ==1 :
        return JSONResponse(
-            content={"message": "logged in successfully" ,"status": "success"},
+            content={"message": "logged in successfully","access_token":generated_access_token,"refresh_token":generated_refresh_token ,"status": "success"},
             status_code=200
         )
    else:
@@ -193,6 +193,7 @@ async def forget_password_view( forget_password_payload: dict,background_tasks):
             content={"message": "Error in forget password link generation", "status": "failure"},
             status_code=400
         )
+    
 def reset_password_view( forget_password_token, new_password ):
     
 
@@ -255,10 +256,12 @@ def reset_password_view( forget_password_token, new_password ):
             status_code=400
         )
 
-   
-    
-   return hashed_password
-    
+   else:
+        
+    return JSONResponse(
+                content={"message": "new password has been updated successfully", "status": "success"},
+                status_code=200
+            ) 
 def delete_user_view(delete_request ):
 
     check_user= user_details_collection.find_one({"email":delete_request.email, "role":delete_request.role})
