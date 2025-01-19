@@ -8,6 +8,7 @@ collected_who_is_data_coll= "scrapped_whois_data"
 api_request_response_coll = "whois_api_logs"
 auth_request_response_coll = "auth_api_logs"
 user_subscription_coll = 'subscription_details'
+register_score_coll="register_score"
 secret_key='secret'
 jwt_algorithm='HS256'
 exp_time_for_access_token=1 

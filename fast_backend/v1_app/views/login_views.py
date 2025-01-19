@@ -282,3 +282,7 @@ def delete_user_view(delete_request ):
             content={"message": "user not deleted, try after sometime", "status": "failure"},
             status_code=400
         )
+    
+
+
+    

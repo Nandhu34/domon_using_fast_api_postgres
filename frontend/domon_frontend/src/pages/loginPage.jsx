@@ -20,6 +20,15 @@ export default function Login() {
         setRole('');
 };
 
+useEffect(() => {
+  const userToken = Cookies.get(config.COOKIENAME);
+
+  // Check if token exists
+  if (userToken) {
+    navigate('/home'); // Redirect to home page
+  }
+}, [navigate]);
+
 
 useEffect(() => {
   if (showAlert && backendResponse?.status === "success") {

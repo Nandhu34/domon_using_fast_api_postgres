@@ -14,6 +14,7 @@ try :
     api_request_response_coll = domon_db [config.api_request_response_coll]    
     auth_request_response_coll = domon_db [config.auth_request_response_coll]
     user_subscription_coll = domon_db [config.user_subscription_coll]
+    register_score_details_coll = domon_db[config.register_score_coll]
 
 
 except Exception as e:
