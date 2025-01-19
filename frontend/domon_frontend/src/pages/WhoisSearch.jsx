@@ -8,23 +8,19 @@ function WhoisSearch() {
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   
-  useEffect(()=>
-  {
-    if(whoisData?.status==="failure")
-    {
-      const timer =setTimeout(()=>
-      {
-        setWhoisData({})
-      },5000)
+  useEffect(() => {
+    if (whoisData?.status === "failure") {
+      const timer = setTimeout(() => {
+        setWhoisData({});
+      }, 5000);
     }
-  },[whoisData])
+  }, [whoisData]);
+
   const handleSearch = async () => {
     setLoading(true);
     try {
       const response = await fetch(`http://127.0.0.1:8000/v1/auth/get_whois?get_whois=${domain}`);
-      console.log(domain , "domaina ")
       const data = await response.json();
-      console.log(data,"data")
       setWhoisData(data);
     } catch (error) {
       console.error("Error fetching WHOIS data:", error);
@@ -33,54 +29,57 @@ function WhoisSearch() {
     }
   };
 
+  return (
+    <>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-10 shadow-lg rounded-lg max-w-4xl w-full">
+          <h1 className="text-4xl font-bold text-gray-800 text-center mb-6">WHOIS Information Lookup</h1>
+          
+          <p className="text-gray-600 mb-4">
+            The WHOIS system is an integral part of the internet infrastructure. It allows users to query databases that store the registered users or assignees of a domain name, IP address, or an autonomous system. This information is crucial for a variety of purposes, including network administration, domain name management, and cybersecurity.
+          </p>
+          
+          <p className="text-gray-600 mb-4">
+            By looking up WHOIS data, you can discover the registrant's name, address, phone number, email, and the domain's expiration date. This information can help identify ownership, detect fraudulent activities, and resolve domain disputes. It also plays a vital role in ensuring the accountability of domain registrations.
+          </p>
+          
+          <p className="text-gray-600 mb-8">
+            WHOIS databases are maintained by domain registrars and the Internet Corporation for Assigned Names and Numbers (ICANN). They offer a transparent view into who is responsible for internet resources, which helps foster a safer and more secure internet.
+          </p>
+          
+          <div className="mt-10 text-center">
+            {whoisData?.status === "success" && <WhoisDisplay whoisData={whoisData} />}
+            {whoisData?.status === "failure" && (
+              <p className="text-red-500 font-bold text-lg mt-4 p-2 border border-red-400 rounded bg-red-100 inline-block">
+                {whoisData.message || "No details found"}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
 
-  return (<>
-  <br /><br />
-
-      <div className="p-6 mt-9 bg-white shadow-lg rounded-lg max-w-xl mx-auto flex flex-col "  style={{cursor:loading ?'progress':'pointer' }}>
-      <h2 className="text-2xl font-semibold text-gray-700 mb-9 text-center">Get Whois Information</h2>
-      
-      {/* Search Bar */}
-      <div className="flex mb-4">
-        <div className="w-full flex space-x-4">
-          <div className="w-full"> 
+      <div className="fixed bottom-0 w-full bg-white shadow-md p-6">
+        <div className="max-w-xl mx-auto flex flex-col">
+          <div className="flex space-x-4">
             <input
-              className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+              className="flex-1 bg-gray-50 border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               placeholder="Enter domain name"
             />
-          </div>
-          <div className="w-1/4"> {/* 3:1 ratio */}
             <button
-              className="w-full flex items-center justify-center rounded bg-slate-800 py-2 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              className="bg-blue-600 text-white px-4 py-3 rounded-md shadow hover:bg-blue-500 transition disabled:bg-gray-400"
               type="button"
               onClick={handleSearch}
+              disabled={loading}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mr-2">
-                <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
-              </svg>
               {loading ? "Loading..." : "Search"}
-              
             </button>
           </div>
         </div>
       </div>
-      </div>
-      <div style={{ marginLeft: "200px", marginRight: "200px", textAlign: "center" }}>
-  {whoisData?.status === "success" && <WhoisDisplay whoisData={whoisData} />}
-  {whoisData?.status === "failure" && (
-  <p className="text-red-500 font-bold text-lg mt-4 p-1 border-2 border-green-500 rounded-lg bg-red-100 max-w-xs mx-auto pr-4">
-    {whoisData.message || "No details found"}
-  </p>
-)}
-
-</div>
-
     </>
   );
-  
 }
 
-
-export default WhoisSearch
+export default WhoisSearch;

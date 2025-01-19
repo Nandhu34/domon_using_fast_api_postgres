@@ -1,7 +1,7 @@
 from ..db_operations.db_creation import register_score_details_coll
 
 
-def get_malicious_score(registrar_name ):
+def get_register_score(registrar_name ):
   
     score=0
     try :
