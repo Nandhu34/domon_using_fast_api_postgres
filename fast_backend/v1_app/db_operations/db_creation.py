@@ -15,6 +15,9 @@ try :
     auth_request_response_coll = domon_db [config.auth_request_response_coll]
     user_subscription_coll = domon_db [config.user_subscription_coll]
     register_score_details_coll = domon_db[config.register_score_coll]
+    moniter_domain_keyword_coll = domon_db[config.montering_domain_list_coll]
+    moniter_domain_expiry_keyword_coll = domon_db[config.montering_domain_expiry_list_coll]
+    collected_whois_data_coll = domon_db[config.collected_whois_data_coll]
 
 
 except Exception as e:

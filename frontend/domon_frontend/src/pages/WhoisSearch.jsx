@@ -19,7 +19,7 @@ function WhoisSearch() {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/v1/auth/get_whois?get_whois=${domain}`);
+      const response = await fetch(`http://127.0.0.1:8000/v1/other_services/get_whois?domain_name=${domain}`);
       const data = await response.json();
       setWhoisData(data);
     } catch (error) {
