@@ -7,3 +7,7 @@ domon/frontend/domon_frontend/src/config.js
 **/config.js
 
 .env
+
+
+domon/fast_backend/v1_app/domain_script/config.py
+

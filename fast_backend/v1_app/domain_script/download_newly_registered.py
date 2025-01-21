@@ -6,9 +6,10 @@ from datetime  import date , datetime
 from ..db_operations.db_creation import  * 
 import config 
 
+
 def download_newly_registered_domain():
         try :
-          full_date = "helo"
+          full_date = ""
           file_path =  f"./files/daily_registered/hello.json"
           print(file_path)
           if not  os.path.exists(file_path):
