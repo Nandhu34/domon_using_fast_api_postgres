@@ -73,8 +73,8 @@ def iterate_download_files_dns(keyword, email):
                          continue 
 
                 
-                else:
-                     result_per_keyword.append({"email":email,"domain_name":each_doc['domain'], "keyword":keyword})
+                    else:
+                        result_per_keyword.append({"email":email,"domain_name":each_doc['domain'], "keyword":keyword})
             return result_per_keyword
 
 def get_whois_function(domain_name):
@@ -112,7 +112,7 @@ def collect_insert_who_is(all_domains):
         if collected_whois_data:
             if collected_whois_data['domain_name']:
                     print(collected_whois_data)
-                    schema_data = {"keyword_used":each_domain['keyword'], "email":each_domain['email'], "domain_name":each_domain['domain_name'], "whois_result":collected_whois_data,"date_of_collection":datetime.datetime.now().isoformat()}
+                    schema_data = {"keyword_used":each_domain['keyword'], "email":each_domain['email'], "domain_name":each_domain['domain_name'], "whois_result":collected_whois_data,"date_of_collection":datetime.datetime.now().isoformat(),"schedule_type":"domain"}
                     verify_insertion = collected_whois_data_coll.insert_one(schema_data)
                     if verify_insertion:
                         print("data inserted successfully")

@@ -11,3 +11,15 @@ domon/frontend/domon_frontend/src/config.js
 
 domon/fast_backend/v1_app/domain_script/config.py
 
+
+fast_backend/v1_app/domain_script/config.py
+
+
+
+
+fast_backend/v1_app/domain_expiry_script/config.py
+
+fast_backend/domain_expiry_script/config.py
+
+fast_backend/domain_script/config.py
+

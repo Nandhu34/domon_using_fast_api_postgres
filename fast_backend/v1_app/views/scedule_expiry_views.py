@@ -1,7 +1,7 @@
 
 
 
-from  ..domain_script.download_newly_registered  import download_newly_registered_domain
+# from  ..domain_script.download_newly_registered  import download_newly_registered_domain
 from datetime import datetime
 from ..db_operations.db_creation import *
 from fastapi.responses import JSONResponse
@@ -55,7 +55,11 @@ def scedule_domain_expiry_view(email , domain_name):
                 "domain_name": domain_name,
                 "active": True,
                 "date_of_scheduled": datetime.now().isoformat(), 
-             "date_of_last_updated":"" 
+             "date_of_last_updated":"" ,
+             "first_run":True , 
+             "expire_date":"", 
+             "next_alert_message_date":"", 
+             "turn_off_notification":False
                 
                 }
         }

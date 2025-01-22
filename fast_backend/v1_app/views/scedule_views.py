@@ -1,6 +1,6 @@
 
-from  ..domain_script.download_newly_registered  import download_newly_registered_domain
-from ..domain_script.domain_imperation_process import *
+# from  ..domain_script.download_newly_registered  import download_newly_registered_domain
+# from ..domain_script.domain_imperation_process import *
 from datetime import datetime
 from ..db_operations.db_creation import *
 from fastapi.responses import JSONResponse
@@ -132,7 +132,7 @@ def delete_domain_view(email , domain_name):
 
 def pause_domain_view(email , domain_name):
 
-        return (get_all_keywords_to_check_dns_twist())  
+        # return (get_all_keywords_to_check_dns_twist())  
        
 
 
@@ -140,27 +140,27 @@ def pause_domain_view(email , domain_name):
 
 
 
-# qwery= {"email":email,"schedule_list.domain_name":domain_name}
-# print(qwery)
-# check_domain_presence   = moniter_domain_keyword_coll.find_one(qwery)
-# if check_domain_presence ==None :
-#     return JSONResponse(
-#             content={"message": f"No data Found" ,"status": "failure"},
-#             status_code=400
-#         )
+    qwery= {"email":email,"schedule_list.domain_name":domain_name}
+    print(qwery)
+    check_domain_presence   = moniter_domain_keyword_coll.find_one(qwery)
+    if check_domain_presence ==None :
+        return JSONResponse(
+                content={"message": f"No data Found" ,"status": "failure"},
+                status_code=400
+            )
 
-# verify_deleted =     moniter_domain_keyword_coll.update_one ({"email":email , "schedule_list.domain_name":domain_name},{"$set":{"schedule_list.$.active":False}})
-
-
-# if verify_deleted.modified_count==1:
-#         return JSONResponse(
-#             content={"message": f" domain name paused successfully" ,"status": "success"},
-#             status_code=200
-#         )
+    verify_deleted =     moniter_domain_keyword_coll.update_one ({"email":email , "schedule_list.domain_name":domain_name},{"$set":{"schedule_list.$.active":False}})
 
 
-# else:
-#     return JSONResponse(
-#             content={"message": f"domain not paused ! try later" ,"status": "failure"},
-#             status_code=400
-#         )
+    if verify_deleted.modified_count==1:
+            return JSONResponse(
+                content={"message": f" domain name paused successfully" ,"status": "success"},
+                status_code=200
+            )
+
+
+    else:
+        return JSONResponse(
+                content={"message": f"domain not paused ! try later" ,"status": "failure"},
+                status_code=400
+            )
