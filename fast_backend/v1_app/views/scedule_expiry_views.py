@@ -46,6 +46,14 @@ def scedule_domain_expiry_view(email , domain_name):
                 content={"message": f"domain -{domain_name } is aldredy sceduled for monitoring" , "data":{"domain_name":domain_name ,"active":True,  "date_of_sceduled":datetime.now().isoformat()},"status": "success"},
                 status_code=200
             )
+    
+    check_presence=  moniter_domain_expiry_keyword_coll.find_one({"email":email,"schedule_list.domain_name":domain_name})
+    if check_presence :
+        return JSONResponse(
+                content={"message": f"domain -{domain_name } is aldredy sceduled for monitoring" , "data":{"domain_name":domain_name ,"active":True,  "date_of_sceduled":datetime.now().isoformat()},"status": "success"},
+                status_code=200
+            )
+    
 
     verification_of_data_insert = moniter_domain_expiry_keyword_coll.update_one(
     {"email": email},
@@ -60,6 +68,7 @@ def scedule_domain_expiry_view(email , domain_name):
              "expire_date":"", 
              "next_alert_message_date":"", 
              "turn_off_notification":False
+            
                 
                 }
         }
@@ -89,7 +98,7 @@ def update_domain_expiry_view(email , domain_name, new_domain_name ):
             )
     
 
-    verify_updated =     moniter_domain_expiry_keyword_coll.update_one({"email":email , "schedule_list.domain_name":domain_name},{"$set":{"schedule_list.$.domain_name":new_domain_name, "schedule_list.$.date_of_last_updated":datetime.now().isoformat()}}, upsert=True)
+    verify_updated =     moniter_domain_expiry_keyword_coll.update_one({"email":email , "schedule_list.domain_name":domain_name},{"$set":{"schedule_list.$.domain_name":new_domain_name,"schedule_list.$.first_run":True , "schedule_list.$.date_of_last_updated":datetime.now().isoformat()}}, upsert=True)
 
     if verify_updated.modified_count==1:
           return JSONResponse(
@@ -124,6 +133,8 @@ def delete_domain_expiry_view(email , domain_name):
                 content={"message": f" domain name deleted successfully" ,"status": "success"},
                 status_code=200
             )
+    
+
 
 
     else:

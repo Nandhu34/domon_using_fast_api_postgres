@@ -6,7 +6,13 @@ module.exports = {
     'node_modules/@material-tailwind/react/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionDuration: {
+        '400': '400ms',
+        '800': '800ms',
+      },
+      
+    },
   },
   plugins: [   require('@tailwindcss/forms'),],
 }

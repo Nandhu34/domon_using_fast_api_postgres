@@ -18,6 +18,20 @@ function Header({
 
 
   const extraOptionRef= useRef(null)
+  const profileOptionRef = useRef(null)
+
+  useEffect(()=>{
+
+    const handleClickOutside =(event) =>
+    {
+      if(profileOptionRef.current &&  !profileOptionRef.current.contains(event.target) )
+      {
+        setProfileMenuOpen(false)
+      }
+    }
+    document.addEventListener("mousedown" , handleClickOutside)
+  },[])
+
 
   useEffect(()=>{
     const handleClickOutside =(event)=>
@@ -65,7 +79,7 @@ function Header({
       </a>
 
       {hoverExtraOption && (
-        <div 
+        <div  
           className="absolute" 
           style={{ top: '50px', left: '0' }} // Adjust as needed for positioning
         >
@@ -95,7 +109,7 @@ function Header({
           <button className="ml-2 px-3 py-1 bg-blue-700 text-white rounded-lg hover:bg-blue-600 transition duration-300">Search</button>
         </div>
       </div>
-      <div className="relative">
+      <div className="relative" ref ={profileOptionRef}>
         <button onClick={toggleProfileMenu} className="flex items-center space-x-2 text-gray-700">
           <span>Profile</span>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

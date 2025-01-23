@@ -19,7 +19,7 @@ function SceduleFunctionalities() {
         ...prevState,
         { domainName, scheduledDate: new Date().toLocaleString() },
       ]);
-      alert(`Domain ${domainName} scheduled successfully!`);
+      // alert(`Domain ${domainName} scheduled successfully!`);
     }
   };
 
@@ -31,7 +31,7 @@ function SceduleFunctionalities() {
         ...prevState,
         { domainName, scheduledDate: new Date().toLocaleString(), alertScheduled: true },
       ]);
-      alert(`Expiration alert scheduled for ${domainName}`);
+      // alert(`Expiration alert scheduled for ${domainName}`);
     }
   };
 
@@ -48,6 +48,8 @@ function SceduleFunctionalities() {
     }
   };
 
+  
+
   const handleEditExpiration = (domainName) => {
     const newExpirationDate = prompt("Edit expiration date (YYYY-MM-DD):");
     if (newExpirationDate) {
@@ -60,6 +62,29 @@ function SceduleFunctionalities() {
       );
     }
   };
+
+  const  handlePauseDomain=(domainName)=>
+  {
+    alert("domain paused successfully")
+
+  }
+  const handlePauseExpiration = (domainName) => {
+
+    alert(" domain expiration paused successfully ")
+
+    // const newDomainName = confirm("Are You want to pause this domain :", domainName);
+    // if (newDomainName) {
+    //   setScheduledDomains((prevState) =>
+    //     prevState.map((domain) =>
+    //       domain.domainName === domainName
+    //         ? { ...domain, domainName: newDomainName }
+    //         : domain
+    //     )
+    //   );
+    // }
+  };
+
+
 
   // Delete Functions
   const handleDeleteDomain = (domainName) => {
@@ -171,6 +196,14 @@ function SceduleFunctionalities() {
                       >
                         Edit
                       </button>
+
+                      <button
+                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                        onClick={() => handlePauseDomain(domain.domainName)}
+                      >
+                        Pause
+                      </button>
+
                       <button
                         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                         onClick={() => handleDeleteDomain(domain.domainName)}
@@ -217,6 +250,15 @@ function SceduleFunctionalities() {
                       >
                         Edit
                       </button>
+
+                      <button
+                        className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
+                        onClick={() => handlePauseExpiration(domain.domainName)}
+                      >
+                        Pause
+                      </button>
+
+
                       <button
                         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                         onClick={() => handleDeleteExpiration(domain.domainName)}

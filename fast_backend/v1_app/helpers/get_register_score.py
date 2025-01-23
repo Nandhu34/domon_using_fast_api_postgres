@@ -15,7 +15,7 @@ def get_register_score(registrar_name ):
         
         return score 
     except Exception as e:
-        return score 
+        return False  
     
 
     

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import WhoisResult from "./WhoisResult"; // Import the result component
 import WhoisDisplay from "./whoisDataDisplay";
+import config from "../config";
+
 
 function WhoisSearch() {
   const [domain, setDomain] = useState("");
@@ -19,7 +21,7 @@ function WhoisSearch() {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/v1/other_services/get_whois?domain_name=${domain}`);
+      const response = await fetch(config.GETWHOISURL+domain);
       const data = await response.json();
       setWhoisData(data);
     } catch (error) {

@@ -14,6 +14,6 @@ def get_mx_record(domain_name):
                         mx_count=1
                     return mx
          except:
-            return mx
+            return False 
          
 
