@@ -28,10 +28,20 @@ def delete_domain(payload :validateSceduleDomain):
     return delete_domain_view(payload.email , payload.domain_name)
     
 
-@scedule_routes.put('/pause_domain')
+@scedule_routes.post('/pause_domain')
 def pause_domain(payload :validateSceduleDomain):
+    # return str(payload)
     return pause_domain_view(payload.email , payload.domain_name)
-    
+
+
+
+@scedule_routes.post('/unpause_domain')
+def pause_domain(payload :validateSceduleDomain):
+    # return str(payload)
+    return unpause_domain_view(payload.email , payload.domain_name)
+
+
+
 
 @scedule_routes.post('/scedule_domain_expiry')
 def scedule_domain_expiry(payload :validateSceduleDomain):
@@ -49,7 +59,44 @@ def delete_domain_expiry(payload :validateSceduleDomain):
     return  delete_domain_expiry_view(payload.email , payload.domain_name)
     
 
-@scedule_routes.put('/pause_domain_expiry')
+@scedule_routes.post('/pause_domain_expiry')
 def pause_domain_expiry(payload :validateSceduleDomain):
     return  pause_domain_expiry_view(payload.email , payload.domain_name)
     
+
+
+@scedule_routes.post('/unpause_domain_expiry')
+def unpause_domain_expiry(payload :validateSceduleDomain):
+    return  unpause_domain_expiry_view(payload.email , payload.domain_name)
+    
+
+
+@scedule_routes.post('/get_domains')
+def get_domain(body :getScheduledDomains,page_no: Optional[int] = 1, no_of_results: Optional[int] = 10 ):
+ 
+    # offset= payload.offset
+    # no_of_results = payload.no_of_results
+
+
+    print(page_no , no_of_results)
+    if page_no <=0:
+        page_no =1
+    if no_of_results <=0:
+        no_of_results =10
+    return get_sceduled_domains_view(page_no, no_of_results, body.email)
+
+
+
+@scedule_routes.post('/get_expiry_domains')
+def get_domain( body:getScheduledDomains,page_no: Optional[int] = 1, no_of_results: Optional[int] = 10):
+ 
+    # offset= payload.offset
+    # no_of_results = payload.no_of_results
+    print(page_no , no_of_results)
+    if page_no <=0:
+        page_no =1
+    if no_of_results <=0:
+        no_of_results =10
+    print(page_no , no_of_results)
+    return get_sceduled_domains_expiry_view(page_no, no_of_results, body.email)
+

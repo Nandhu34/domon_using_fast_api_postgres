@@ -5,9 +5,34 @@ from fastapi.middleware.cors import CORSMiddleware
 from v1_app.routers.login_routers import login_routes
 from v1_app.routers.home_routes import other_services_routes
 from v1_app.routers.scedule_routes import scedule_routes
+# pip install apscheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+import datetime 
+import os
+def run_daily_task():
+    print(f"Running daily task at {datetime.datetime.now()}...")
+    # os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_script/domain_imperation_process.py")
+    os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_expiry_script/domain_expiration_check.py")
 
+# Scheduler instance  minutes days
+scheduler = BackgroundScheduler()
+scheduler.add_job(run_daily_task, "interval", minutes=1)  # Runs once every 24 hours
+
+# Use FastAPI's lifespan event for proper startup/shutdown
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Starting application and scheduler...")
+    scheduler.start()  # Start the scheduler when the app starts
+    yield  # Runs the application
+    print("Shutting down application and scheduler...")
+    scheduler.shutdown()  # Shutdown the scheduler when the app stops
+
+# Initialize FastAPI with lifespan event
+app = FastAPI(lifespan=lifespan)
+
+# CORS Middleware
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,

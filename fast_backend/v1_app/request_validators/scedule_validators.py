@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel, EmailStr, validator , Field 
 from typing import List
 from typing import Optional
 from enum import Enum
@@ -21,3 +21,11 @@ class validateSceduleUpdateDomain(BaseModel):
         if values.get('domain_name') == value:
             raise ValueError('The updated domain name must be different from the original domain name.')
         return value
+
+
+class role_enum(BaseModel):
+    user:"user"
+
+class getScheduledDomains(BaseModel):
+    email :EmailStr
+    

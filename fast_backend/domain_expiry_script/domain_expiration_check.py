@@ -147,16 +147,15 @@ def send_all_report_to_mail(data, receiver_email, subject, body):
         server.login(sender_email, password)
         server.sendmail(sender_email, recipient_email, message.as_string())
 
-# total_new_domains = get_new_domains_from_db()
-# print(total_new_domains)
+total_new_domains = get_new_domains_from_db()
+print(total_new_domains)
 
-# check_update_expiration_date(total_new_domains)
+check_update_expiration_date(total_new_domains)
 
 
 
 check_and_send_alarm()
 
-# check_whois_expiry_date(all_domains)
 
 # all_pdf_file_locatios = group_data_by_client()
 

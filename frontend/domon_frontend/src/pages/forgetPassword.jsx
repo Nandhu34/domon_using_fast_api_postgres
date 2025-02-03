@@ -26,25 +26,10 @@ function  ForgetPassword()
     const handleApiCall=async()=>
     {
         console.log(" making api call ")
-        const loginDetails = Cookies.get(config.COOKIENAME);
-    if (!loginDetails) {
-      console.error("LoginDetails cookie not found");
-      setErrorMessage("LoginDetails cookie not found")
-      return;
-    }
-
-const { access_token } = JSON.parse(loginDetails);
-console.log(loginDetails)
-     
-    if (!access_token) {
-      console.error("Access token not found in LoginDetails");
-      setErrorMessage("accesstoken cookie not found")
-      return;
-    }
-
+  
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization",`Bearer ${access_token}`);
+        // myHeaders.append("Authorization",`Bearer ${access_token}`);
 
         const raw = JSON.stringify({
         "email": registeredEmail,

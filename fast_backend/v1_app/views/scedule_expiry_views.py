@@ -5,7 +5,8 @@
 from datetime import datetime
 from ..db_operations.db_creation import *
 from fastapi.responses import JSONResponse
-
+import json
+from bson import json_util
 
 '''
 db.domains_to_moniter.updateOne(
@@ -43,20 +44,20 @@ def scedule_domain_expiry_view(email , domain_name):
     check_existance =  moniter_domain_expiry_keyword_coll.find_one({"email":email,"schedule_list.domain_name":domain_name})
     if check_existance :
         return JSONResponse(
-                content={"message": f"domain -{domain_name } is aldredy sceduled for monitoring" , "data":{"domain_name":domain_name ,"active":True,  "date_of_sceduled":datetime.now().isoformat()},"status": "success"},
+                content={"message": f"expiry domain -{domain_name } is aldredy sceduled for monitoring" , "data":{"domain_name":domain_name ,"active":True,  "date_of_sceduled":datetime.now().isoformat()},"status": "success"},
                 status_code=200
             )
     
     check_presence=  moniter_domain_expiry_keyword_coll.find_one({"email":email,"schedule_list.domain_name":domain_name})
     if check_presence :
         return JSONResponse(
-                content={"message": f"domain -{domain_name } is aldredy sceduled for monitoring" , "data":{"domain_name":domain_name ,"active":True,  "date_of_sceduled":datetime.now().isoformat()},"status": "success"},
+                content={"message": f"expiry domain -{domain_name } is aldredy sceduled for monitoring" , "data":{"domain_name":domain_name ,"active":True,  "date_of_sceduled":datetime.now().isoformat()},"status": "success"},
                 status_code=200
             )
     
 
     verification_of_data_insert = moniter_domain_expiry_keyword_coll.update_one(
-    {"email": email},
+    {"email": email, "role":"user"},
     {
         "$push": {
             "schedule_list": {
@@ -78,7 +79,7 @@ def scedule_domain_expiry_view(email , domain_name):
 
     if verification_of_data_insert:
         return JSONResponse(
-                content={"message": f"domain -{domain_name } is sceduled for monitoring" ,"status": "success"},
+                content={"message": f"expiry domain -{domain_name } is sceduled for monitoring" ,"status": "success"},
                 status_code=200
             )
 
@@ -149,7 +150,7 @@ def delete_domain_expiry_view(email , domain_name):
 def pause_domain_expiry_view(email , domain_name):
     
     qwery= {"email":email,"schedule_list.domain_name":domain_name}
-    print(qwery)
+    # print(qwery)
     check_domain_presence   = moniter_domain_expiry_keyword_coll.find_one(qwery)
     if check_domain_presence ==None :
         return JSONResponse(
@@ -172,3 +173,141 @@ def pause_domain_expiry_view(email , domain_name):
                 content={"message": f"domain not paused ! try later" ,"status": "failure"},
                 status_code=400
             )
+
+
+
+def unpause_domain_expiry_view(email , domain_name):
+    
+    qwery= {"email":email,"schedule_list.domain_name":domain_name}
+    # print(qwery)
+    check_domain_presence   = moniter_domain_expiry_keyword_coll.find_one(qwery)
+    if check_domain_presence ==None :
+        return JSONResponse(
+                content={"message": f"No data Found" ,"status": "failure"},
+                status_code=400
+            )
+    
+    verify_deleted =     moniter_domain_expiry_keyword_coll.update_one ({"email":email , "schedule_list.domain_name":domain_name},{"$set":{"schedule_list.$.active":True }})
+
+
+    if verify_deleted.modified_count==1:
+          return JSONResponse(
+                content={"message": f" domain name unpaused successfully" ,"status": "success"},
+                status_code=200
+            )
+
+
+    else:
+        return JSONResponse(
+                content={"message": f"domain not unpaused ! try later" ,"status": "failure"},
+                status_code=400
+            )
+
+
+
+def  get_sceduled_domains_expiry_view(page_no, no_of_results , email):
+        role="user"
+
+        user_found = moniter_domain_expiry_keyword_coll.find_one({"email":email, "role":role})
+        if user_found == None :
+             return JSONResponse(
+               
+               content={"data":'user not found'},
+                 status_code=400
+            ) 
+        offset = (page_no - 1) * no_of_results
+    
+
+        aggregate_query =[
+    {
+        '$match': {
+            'email': email
+        }
+    }, {
+        '$project': {
+            'total_result': {
+                '$size': '$schedule_list'
+            }, 
+            'data': '$schedule_list', 
+            'email': '$email'
+        }
+    }, {
+        '$unwind': {
+            'path': '$data'
+        }
+    }, {
+        '$skip': offset
+    }, {
+        '$limit': no_of_results
+    }, {
+        '$group': {
+            '_id': '$_id', 
+            'email': {
+                '$first': '$email'
+            }, 
+            'total_result': {
+                '$first': '$total_result'
+            }, 
+            'result': {
+                '$push': '$data'
+            }
+
+        }
+        ,
+        
+    },{
+    '$project': {
+      '_id': 0
+    }
+  }
+]
+       
+        # print(aggregate_query)
+        res_data =list( moniter_domain_expiry_keyword_coll.aggregate(aggregate_query))
+        if res_data ==[]:
+             paggination ={
+             "no_of_results_per_page" : no_of_results,
+             "total_results" :res_data[0]['total_result']  , 
+             "has_preview_page":True if int(page_no) >=2 else False     , 
+             "has_next_page": False  ,    
+             "current_page":page_no        }
+             response_data = {'paggination':paggination,'data':res_data}
+             json_response = json_util.dumps(response_data)
+
+        # Return as a proper JSON response
+             return JSONResponse(
+                content=json.loads(json_response),  # Converts the BSON-serialized string back into JSON
+            status_code=200
+        )
+        # print(res_data)
+        # if res_data==[]:
+        #      return ({"data":"no data fpound "})
+             
+
+        # print(res_data[0]['result'])
+        # print(len(res_data[0]['result']),"oo")
+      
+        paggination ={
+             "no_of_page" : no_of_results,
+             "total_results" :res_data[0]['total_result']  , 
+          "has_preview_page":True if int(page_no) >=2 else False     , 
+             "has_next_page":True if no_of_results * page_no < res_data[0]['total_result'] else False ,    
+             "current_page":page_no
+
+        }
+
+        # print(paggination)
+
+        response_data = {
+            "pagination": paggination,
+            "data": res_data
+        }
+
+        # Use bson.json_util.dumps() to handle ObjectId, datetime, etc.
+        json_response = json_util.dumps(response_data)
+
+        # Return as a proper JSON response
+        return JSONResponse(
+            content=json.loads(json_response),  # Converts the BSON-serialized string back into JSON
+            status_code=200
+        )

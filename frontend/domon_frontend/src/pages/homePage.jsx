@@ -3,6 +3,7 @@ import Header from "../pages/header";
 import WhoisSearch from "./WhoisSearch";
 import OtherServices, { DnsLookup, IpFinder, MxRecord, RegisterScore } from "./otherServices";
 import SceduleFunctionalities from "./sceduleDomain";
+import GetAnalytics from "./analyticsPage";
 
 function HomePage() {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -83,7 +84,7 @@ function HomePage() {
     {selectedOption === "schedule_domain" && <SceduleFunctionalities />}
     {selectedOption === "check_active" && <p>{selectedOption}</p>}
     {selectedOption === "other_services" && <p>{selectedOption}</p>}
-    {selectedOption === "get_analytics" && <p>{selectedOption}</p>}
+    {selectedOption === "get_analytics" &&  <GetAnalytics />}
     
 
       </>

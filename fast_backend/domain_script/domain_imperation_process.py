@@ -186,11 +186,13 @@ def send_all_report_to_mail(files_location, receiver_email, subject, body):
 
 
 
-# all_domains  = get_all_keywords_to_check_dns_twist()
+all_domains  = get_all_keywords_to_check_dns_twist()
 
-# collect_insert_who_is(all_domains)
+collect_insert_who_is(all_domains)
 
 all_pdf_file_locatios = group_data_by_client()
+
+
 
 print(all_pdf_file_locatios)
 

@@ -24,7 +24,7 @@ def generate_pdf(email, data, filename):
     
     for entry in data:
         domain_name = entry['domain_name']
-        used_keyword = entry['used_keyword']
+        used_keyword = entry['domain_name']
         whois_result = entry['whois_result']
         date_of_collection = entry['date_of_collection']
 
