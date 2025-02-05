@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from v1_app.routers.login_routers import login_routes
 from v1_app.routers.home_routes import other_services_routes
 from v1_app.routers.scedule_routes import scedule_routes
+from v1_app.routers.analytics_routes import analytics_routes
 # pip install apscheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from contextlib import asynccontextmanager
@@ -46,6 +47,7 @@ app.add_middleware(
 app.include_router(login_routes, prefix="/v1/auth", tags=["authorization"])
 app.include_router(other_services_routes , prefix="/v1/other_services", tags=["home"])
 app.include_router(scedule_routes, prefix="/v1/scedule", tags=["scedule"])
+app.include_router(analytics_routes, prefix="/v1/analytics", tags=["analytics "])
 
 
 
