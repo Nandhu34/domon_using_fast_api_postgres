@@ -4,11 +4,12 @@ import WhoisSearch from "./WhoisSearch";
 import OtherServices, { DnsLookup, IpFinder, MxRecord, RegisterScore } from "./otherServices";
 import SceduleFunctionalities from "./sceduleDomain";
 import GetAnalytics from "./analyticsPage";
+import AboutUs from "./aboutus";
 
 function HomePage() {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);  // To track if delete confirmation is shown
-  const [selectedOption , setSelectedOption] = useState('')
+  const [selectedOption , setSelectedOption] = useState('aboutus')
  
   const toggleProfileMenu = () => {
     setProfileMenuOpen(!profileMenuOpen);
@@ -79,13 +80,12 @@ function HomePage() {
       />}
 
        
-
     {selectedOption === "getWhois" &&<WhoisSearch />}
     {selectedOption === "schedule_domain" && <SceduleFunctionalities />}
     {selectedOption === "check_active" && <p>{selectedOption}</p>}
     {selectedOption === "other_services" && <p>{selectedOption}</p>}
     {selectedOption === "get_analytics" &&  <GetAnalytics />}
-    
+    {selectedOption === "aboutus" && <AboutUs />}
 
       </>
   );

@@ -10,16 +10,16 @@ class DomainEnum(str, Enum):
     domain_expiry = "domain_expiry"
 
 class ValidateGetAnalysis(BaseModel):
-    domain_type: DomainEnum = DomainEnum.all  # Default to "all"
-    start_date: Optional[date] = None
-    end_date: Optional[date] = None
-    keywords_list: Optional[List[str]] = []
+    domain_type: DomainEnum  # Default to "all"
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    keywords_list: Optional[List[str]]
     email: EmailStr
 
     @validator("end_date")
     def check_date_order(cls, end_date, values):
-        """Ensure that end_date is not before start_date."""
+        """Ensure that end_date is not before start_date, but only if both are provided."""
         start_date = values.get("start_date")
-        if start_date and end_date < start_date:
+        if start_date and end_date and end_date < start_date:
             raise ValueError("end_date cannot be before start_date")
         return end_date

@@ -68,6 +68,7 @@ function Header({
 >
   schedule domain
 </a>
+
 <div ref={extraOptionRef}
      onClick={()=>{setHoverExtraOption(!hoverExtraOption)}}
      className="relative inline-block pr-5"
@@ -90,10 +91,12 @@ function Header({
             <a onClick={()=>{setSelectedOption('ip_finder'); console.log("ip finder")}} className="p-3 hover:bg-slate-200 cursor-pointer">IP Finder</a>
             <a onClick={()=>{setSelectedOption('mx_record'); console.log("mx record ")}}  className="p-3 hover:bg-slate-200 cursor-pointer">MX Record</a>
             <a onClick={()=>{setSelectedOption('register_score') ;console.log("regster score i ")}} className="p-3 hover:bg-slate-200 cursor-pointer">Register Score</a>
-
+            
           </div>
         </div>
+
       )}
+      
     </div>
     
 
@@ -102,6 +105,12 @@ function Header({
   className="text-gray-700 hover:text-blue-700 transition duration-300 cursor-pointer pr-5"
 >
   Analytics
+</a>
+<a 
+  onClick={() => { setSelectedOption("aboutus"); }} 
+  className="text-gray-700 hover:text-blue-700 transition duration-300 cursor-pointer pr-5"
+>
+  About us 
 </a>
 
         <div className="relative flex items-center">
