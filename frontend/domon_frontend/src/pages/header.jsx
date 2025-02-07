@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import EditUser from "./edit_user_data";
 
 function Header({
+  editUserData,
+  setEditUserData , 
   profileMenuOpen,
   setProfileMenuOpen,
   confirmDelete,
@@ -15,10 +18,28 @@ function Header({
 
 
   const [hoverExtraOption , setHoverExtraOption] = useState(false)
-
+  const editUserRef = useRef(null)
 
   const extraOptionRef= useRef(null)
   const profileOptionRef = useRef(null)
+
+  useEffect(()=>
+  {
+    const handleEditUserClickOutside=(event)=>
+    {
+      if(editUserRef.current &&  !editUserRef.current.contains(event.target))
+      {
+        console.log(" close popup funn")
+        setEditUserData(false)
+      }
+    }
+
+       document.addEventListener('mousedown',handleEditUserClickOutside)
+       return () => {
+        document.removeEventListener("mousedown", handleEditUserClickOutside);
+      };
+
+  },[])
 
   useEffect(()=>{
 
@@ -127,13 +148,33 @@ function Header({
         </button>
         {profileMenuOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
-            <a onClick="" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">Update Account Data</a>
+            <a onClick={()=>{console.log("edit user data ");setEditUserData(!editUserData);setProfileMenuOpen(false)}} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">View Account Data</a>
             <a onClick={handleLogout} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">Logout</a>
             <a onClick={handleDeleteAccount} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">Delete Account</a>
           </div>
         )}
       </div>
+      
 
+      {editUserData && (
+
+
+<div   className="flex  flex-col items-center justify-center fixed inset-0  bg-black  bg-opacity-50 z-50 backdrop-blur-sm">
+<div  ref={editUserRef } className="bg-white rounded-lg shadow-lg">
+<EditUser />
+
+</div>
+<div> <button  onClick={()=>{setEditUserData(false)}}className="p-2 w-[100px]  bg-slate-50  hover:bg-black hover:text-white border rounded mt-3"> close  </button></div>
+</div>
+      )}
+
+
+  {/* // <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm z-50">
+  //   <div className="bg-white p-6 rounded-lg shadow-lg">
+  //     {<EditUser />}
+  //   </div>
+  // </div> */}
+   
       {/* Confirmation Modal for Deletion */}
       {confirmDelete && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">

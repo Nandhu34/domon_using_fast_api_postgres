@@ -3,7 +3,11 @@ from   ..db_operations.db_creation import *
 from fastapi.responses import JSONResponse
 from ..auth_helpers.password_encode_decode import * 
 import datetime
+from bson.json_util import dumps
+
 from ..report_generation.send_forget_password_email import   * 
+
+
 def register_new_user_view(token_payload):
    # check user aldredy present 
    email = token_payload.email 
@@ -285,4 +289,24 @@ def delete_user_view(delete_request ):
     
 
 
+
+def get_user_view(email, role):
+    check_user_existance = user_details_collection.find_one({"email":email, "role":role},{ 'password':0,"access_token":0,"refresh_token":0,"reset_password_token":0,"reset_password_token_expire":0})
+    # print(check_user_existance)
+    if check_user_existance  == None :
+        return JSONResponse(
+            content={"message": "user not found", "status": "failure"},
+            status_code=400
+        )
+    else:
+       
+        check_user_existance['_id']= str(check_user_existance['_id'])
+
+        return JSONResponse(
+            content={"data":check_user_existance, "status": "success"},
+            status_code=200
+        )
     
+
+def update_user_data(email, role):
+    return "hello "

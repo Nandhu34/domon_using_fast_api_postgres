@@ -5,12 +5,13 @@ import OtherServices, { DnsLookup, IpFinder, MxRecord, RegisterScore } from "./o
 import SceduleFunctionalities from "./sceduleDomain";
 import GetAnalytics from "./analyticsPage";
 import AboutUs from "./aboutus";
+import EditUser from "./edit_user_data";
 
 function HomePage() {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);  // To track if delete confirmation is shown
   const [selectedOption , setSelectedOption] = useState('aboutus')
- 
+  const [editUserData, setEditUserData] = useState(false )
   const toggleProfileMenu = () => {
     setProfileMenuOpen(!profileMenuOpen);
   };
@@ -49,6 +50,8 @@ function HomePage() {
   return (
     <>
       <Header
+        editUserData={editUserData}
+        setEditUserData={ setEditUserData}
         profileMenuOpen={profileMenuOpen}
         setProfileMenuOpen={setProfileMenuOpen}
         confirmDelete={confirmDelete}

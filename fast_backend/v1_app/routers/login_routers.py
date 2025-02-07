@@ -1,6 +1,7 @@
-from fastapi import APIRouter 
+from fastapi import APIRouter ,Query
 from  ..request_validators.auth_validators import  *
 from fastapi import BackgroundTasks
+
 
 import  v1_app.views.login_views as views
 login_routes = APIRouter()
@@ -51,19 +52,21 @@ def  reset_password(forget_password_token:str,request: validate_reset_password):
 
 
 
+@login_routes.get('/update_user')
+def  get_user_data(email:EmailStr =Query(...), role:str = Query(...)):
+
+    return views.get_user_view(email, role)
+
 
 
 
 
 
 @login_routes.put('/update_user')
-def  update_password():
+def  update_password(email:EmailStr =Query(...), role:str = Query(...)):
 
 
-    response = "update user is pending"
-
-    # response =    views.reset_password_view()
-    return response
+    return views.update_user_data(email, role)
 
 
 
