@@ -14,12 +14,12 @@ import datetime
 import os
 def run_daily_task():
     print(f"Running daily task at {datetime.datetime.now()}...")
-    # os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_script/domain_imperation_process.py")
+    os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_script/domain_imperation_process.py")
     os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_expiry_script/domain_expiration_check.py")
 
 # Scheduler instance  minutes days
 scheduler = BackgroundScheduler()
-scheduler.add_job(run_daily_task, "interval", minutes=1)  # Runs once every 24 hours
+scheduler.add_job(run_daily_task, "interval", days=7)  # Runs once every 24 hours
 
 # Use FastAPI's lifespan event for proper startup/shutdown
 @asynccontextmanager

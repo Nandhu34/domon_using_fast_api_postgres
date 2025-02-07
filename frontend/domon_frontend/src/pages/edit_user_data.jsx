@@ -80,7 +80,7 @@ function EditUser() {
 
                         <tr key={key}>
                             <td className="border p-3  border-gray-300 dark:border-gray-600">{key}</td>
-                            <input readOnly={true}  className="p-3" value ={userData[key]} type="text"/>
+                            <input readOnly={true}  className="p-3" value ={userData[key]?userData[key]:"First Login"} type="text"/>
                             {/* <td className="border p-3  border-gray-300 dark:border-gray-600"  >Edit </td> */}
                         </tr>)
                        )

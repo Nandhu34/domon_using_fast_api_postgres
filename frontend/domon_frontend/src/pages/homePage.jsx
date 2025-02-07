@@ -6,12 +6,19 @@ import SceduleFunctionalities from "./sceduleDomain";
 import GetAnalytics from "./analyticsPage";
 import AboutUs from "./aboutus";
 import EditUser from "./edit_user_data";
+import config from "../config";
+import Cookie from 'js-cookie'
 
 function HomePage() {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);  // To track if delete confirmation is shown
   const [selectedOption , setSelectedOption] = useState('aboutus')
   const [editUserData, setEditUserData] = useState(false )
+
+  let cookieData = Cookie.get(config.COOKIENAME)
+
+  cookieData =cookieData ? JSON.parse(cookieData):null
+
   const toggleProfileMenu = () => {
     setProfileMenuOpen(!profileMenuOpen);
   };
@@ -25,13 +32,16 @@ function HomePage() {
 
   const confirmDeleteAccount = async () => {
     try {
-      const response = await fetch("/api/delete-account", {
+      const url = config.DELETE_USER_ACCOUNT
+      const response = await fetch(url, {
         method: "DELETE",
-        credentials: "include", 
+      
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({"email":cookieData.email, "role":cookieData.role})
       });
 
       if (response.ok) {
-        
+        console.log(" resposne is okay ")
         document.cookie.split(";").forEach((c) => {
           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
         });
