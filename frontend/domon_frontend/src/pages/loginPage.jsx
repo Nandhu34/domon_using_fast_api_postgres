@@ -55,6 +55,7 @@ useEffect(() => {
         },[backendResponse])
     const handleSubmit = (event) => {
         event.preventDefault();  
+        console.log(" calling backedn ap ")
         // console.log("Form submitted with values: ", { email, password, role });
        const login_url= config. LOGIN_BACKEND_URL
        const myHeaders = new Headers();
