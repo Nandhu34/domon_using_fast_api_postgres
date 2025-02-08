@@ -1,6 +1,6 @@
 hostname = "127.0.0.1"
 port = 8000
-mongo_uri ='mongodb://localhost:27017'
+mongo_uri ='mongodb://mongo:unIzHWKNaHdsYQHIAWiatOsYBODcETaF@autorack.proxy.rlwy.net:42724'
 db_name="domain_monitering"
 user_details_coll = "user_details"
 total_registered_database_coll = "total_registered_domains"

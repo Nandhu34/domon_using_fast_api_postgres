@@ -1,0 +1,15 @@
+APScheduler==3.11.0
+dnspython==2.1.0
+dnstwist==20220131
+fastapi==0.115.8
+pydantic==2.10.6
+PyJWT==2.10.1
+pymongo==3.12.3
+python_bcrypt==0.3.2
+python_whois==0.9.4
+reportlab==3.6.8
+Requests==2.32.3
+selenium==4.28.1
+SQLAlchemy==2.0.36
+uvicorn==0.34.0
+pydantic[email]
