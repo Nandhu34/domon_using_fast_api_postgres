@@ -1,4 +1,4 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI , Depends
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 # from routers.login_routes import login_routes
@@ -9,7 +9,8 @@ from v1_app.routers.analytics_routes import analytics_routes
 # pip install apscheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from contextlib import asynccontextmanager
-
+# from ..fast_backend.v1_app.middleware.role_verification import validate_token_and_role
+import middleware 
 import datetime 
 import os
 def run_daily_task():
@@ -44,6 +45,9 @@ app.add_middleware(
 )
 
 
+# app.add_middleware(auth_middleware)
+
+# dependencies=[Depends(middleware.validate_token_and_role([]))]
 app.include_router(login_routes, prefix="/v1/auth", tags=["authorization"])
 app.include_router(other_services_routes , prefix="/v1/other_services", tags=["home"])
 app.include_router(scedule_routes, prefix="/v1/scedule", tags=["scedule"])

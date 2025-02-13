@@ -33,7 +33,7 @@ class validate_register_new_user(BaseModel):
     @validator('role')
     def role_valid(cls, role):
         print(" cheking role ")
-        valid_roles = ['user']  
+        valid_roles = ['user', 'admin']  
         if role not in valid_roles:
             raise ValueError(f'Role must be one of {valid_roles}')
         return role

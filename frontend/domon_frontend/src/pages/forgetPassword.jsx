@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import config  from '../config'
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
-
+import globalErrorHandler from "../global_error_handler";
 
 function  ForgetPassword()
 {

@@ -3,7 +3,7 @@ import config from "../config";
 import Header from "./header";
 import { redirect } from "react-router-dom";
 import Cookies from 'js-cookie'
-
+import globalErrorHandler from "../global_error_handler";
 
 
 function EditUser() {

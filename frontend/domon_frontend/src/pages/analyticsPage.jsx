@@ -9,7 +9,7 @@ import { Card, Typography } from "@material-tailwind/react";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./pieChartPage";
-
+import globalErrorHandler from "../global_error_handler";
 function GetAnalytics() {
   const [pagginationStartNo, setPagginationPageNo] = useState(1);
   const [pagginationResultsPerPage, setPagginationresultsPerPage] = useState(10);

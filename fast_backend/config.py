@@ -1,6 +1,7 @@
 hostname = "127.0.0.1"
 port = 8000
-mongo_uri ='mongodb://mongo:unIzHWKNaHdsYQHIAWiatOsYBODcETaF@autorack.proxy.rlwy.net:42724'
+mongo_uri="mongodb://localhost:27017/"
+# mongo_uri ='mongodb://mongo:unIzHWKNaHdsYQHIAWiatOsYBODcETaF@autorack.proxy.rlwy.net:42724'
 db_name="domain_monitering"
 user_details_coll = "user_details"
 total_registered_database_coll = "total_registered_domains"
@@ -12,7 +13,6 @@ register_score_coll="register_score"
 montering_domain_list_coll= "domains_to_moniter"
 montering_domain_expiry_list_coll="domains_expiry_to_moniter"
 collected_whois_data_coll ="collected_whois_data"
-
 secret_key='secret'
 jwt_algorithm='HS256'
 exp_time_for_access_token=1 

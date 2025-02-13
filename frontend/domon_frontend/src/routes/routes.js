@@ -8,6 +8,8 @@ import ForgetPassword from '../pages/forgetPassword';
 import ResetPassword from '../pages/resetPassword'
 import HomePage from '../pages/homePage';
 import AboutUs from '../pages/aboutus';
+import globalErrorHandler from "../global_error_handler";
+
 
 const AppRoutes = () => {
   return (

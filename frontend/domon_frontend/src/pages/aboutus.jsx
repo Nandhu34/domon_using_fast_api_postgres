@@ -5,7 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import cyber_image1 from '../assets/images/aboutusImages/image1.webp'
 import domain_extension from '../assets/images/aboutusImages/domain_extension.jpg'
 import http_image from '../assets/images/aboutusImages/http_image.jpeg'
-
+import globalErrorHandler from "../global_error_handler";
 const AboutUs = () => {
   const [userCount, setUserCount] = useState(0);
   const [domainCount, setDomainCount] = useState(0);
