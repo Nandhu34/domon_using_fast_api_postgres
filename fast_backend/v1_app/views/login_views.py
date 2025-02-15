@@ -6,7 +6,7 @@ import datetime
 from bson.json_util import dumps
 
 from ..report_generation.send_forget_password_email import   * 
-
+from fastapi import Depends
 
 def register_new_user_view(token_payload):
    # check user aldredy present 

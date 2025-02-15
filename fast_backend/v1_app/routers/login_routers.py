@@ -1,8 +1,8 @@
-from fastapi import APIRouter ,Query
+from fastapi import APIRouter ,Query, Depends
 from  ..request_validators.auth_validators import  *
 from fastapi import BackgroundTasks
 
-
+from  middleware import validate_token_and_role
 import  v1_app.views.login_views as views
 login_routes = APIRouter()
 
@@ -52,7 +52,7 @@ def  reset_password(forget_password_token:str,request: validate_reset_password):
 
 
 
-@login_routes.get('/update_user')
+@login_routes.get('/update_user',dependencies=[Depends(validate_token_and_role(["admin", "user"]))])
 def  get_user_data(email:EmailStr =Query(...), role:str = Query(...)):
 
     return views.get_user_view(email, role)
@@ -62,7 +62,7 @@ def  get_user_data(email:EmailStr =Query(...), role:str = Query(...)):
 
 
 
-@login_routes.put('/update_user')
+@login_routes.put('/update_user',dependencies=[Depends(validate_token_and_role(["admin", "user"]))])
 def  update_password(email:EmailStr =Query(...), role:str = Query(...)):
 
 
@@ -73,7 +73,7 @@ def  update_password(email:EmailStr =Query(...), role:str = Query(...)):
 
 
 
-@login_routes.delete('/delete_user')
+@login_routes.delete('/delete_user',dependencies=[Depends(validate_token_and_role(["admin", "user"]))])
 def  delete_user(delete_request_payload:validate_delete_request_payload):
 
 

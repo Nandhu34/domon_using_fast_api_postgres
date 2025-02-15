@@ -8,12 +8,19 @@ import {
     Button,
   } from "@material-tailwind/react";
 
+  import Cookies from 'js-cookie'
   import { Input } from "@material-tailwind/react";
 import { redirect } from "react-router-dom";
  
 
  async function  HandleApiCall(selectedOption, setResult , domain)
 {
+
+
+
+  let  cookieData = Cookies.get(config.COOKIENAME)
+  cookieData = cookieData ? JSON.parse(cookieData) : null
+
 
 
     if(selectedOption=="all")
@@ -24,18 +31,50 @@ import { redirect } from "react-router-dom";
 
         // Call the DNS lookup API
         try {
-            const dnsResponse = await fetch(config.GETDNSLOOKUPURL + domain);
+            const dnsResponse = await fetch(config.GET_DNS_LOOKUP_URL + domain, {
+              method: "GET", // Specify method
+              headers: {
+                  "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token
+                  "Content-Type": "application/json" // Include Content-Type if needed
+              }});
             const dnsResult = await dnsResponse.json();
+            if( dnsResult && dnsResult.detail ==="Invalid token")
+              {
+               document.cookie.split(";").forEach((c) => {
+         
+                 document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+           
+               });
+           
+               window.location.href = "/login";  // Redirect to login page
+              }
+            
             allResults["dns_lookup"] = dnsResult;
         } catch (error) {
+
             console.error("Error in DNS Lookup:", error);
             allResults["dns_lookup"] = "Error in DNS Lookup";
         }
 
         // Call the IP Finder API
         try {
-            const ipResponse = await fetch(config.GETIPFINDERURL + domain);
+            const ipResponse = await fetch(config.GET_IP_FINDER_URL + domain,{
+              method: "GET", // Specify method
+              headers: {
+                  "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token
+                  "Content-Type": "application/json" // Include Content-Type if needed
+              }});
             const ipResult = await ipResponse.json();
+            if( ipResult && ipResult.detail ==="Invalid token")
+              {
+               document.cookie.split(";").forEach((c) => {
+         
+                 document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+           
+               });
+           
+               window.location.href = "/login";  // Redirect to login page
+              }
             allResults["ip_finder"] = ipResult;
         } catch (error) {
             console.error("Error in IP Finder:", error);
@@ -44,9 +83,25 @@ import { redirect } from "react-router-dom";
 
         // Call the MX Record API
         try {
-            const mxResponse = await fetch(config.GETMXRECORDURL + domain);
+            const mxResponse = await fetch(config.GET_MX_RECORD_URL + domain,{
+              method: "GET", // Specify method
+              headers: {
+                  "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token
+                  "Content-Type": "application/json" // Include Content-Type if needed
+              }});
             const mxResult = await mxResponse.json();
+            if( mxResult && mxResult.detail ==="Invalid token")
+              {
+               document.cookie.split(";").forEach((c) => {
+         
+                 document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+           
+               });
+           
+               window.location.href = "/login";  // Redirect to login page
+              }
             allResults["mx_record"] = mxResult;
+            
         } catch (error) {
             console.error("Error in MX Record:", error);
             allResults["mx_record"] = "Error in MX Record";
@@ -54,8 +109,23 @@ import { redirect } from "react-router-dom";
 
         // Call the Register Score API
         try {
-            const registerResponse = await fetch(config.GETREGISTERSCOREURL + domain);
+            const registerResponse = await fetch(config.GET_REGISTER_SCORE_URL + domain,{
+              method: "GET", // Specify method
+              headers: {
+                  "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token
+                  "Content-Type": "application/json" // Include Content-Type if needed
+              }});
             const registerResult = await registerResponse.json();
+            if( registerResult && registerResult.detail ==="Invalid token")
+              {
+               document.cookie.split(";").forEach((c) => {
+         
+                 document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+           
+               });
+           
+               window.location.href = "/login";  // Redirect to login page
+              }
             allResults["register_score"] = registerResult;
         } catch (error) {
             console.error("Error in Register Score:", error);
@@ -71,12 +141,27 @@ import { redirect } from "react-router-dom";
     {
 
         console.log("dns_lookup")
-        console.log(config.GETDNSLOOKUPURL+domain)
+        console.log(config.GET_DNS_LOOKUP_URL+domain)
 
-        const requestOptions = {method:"GET", redirect:"follow"}
-        fetch(config.GETDNSLOOKUPURL+domain, requestOptions)
+        const requestOptions = {method:"GET", headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token here
+        }, redirect:"follow"}
+        fetch(config.GET_DNS_LOOKUP_URL+domain, requestOptions)
   .then((response) => response.json())
-  .then((result) => setResult(result))
+  .then((result) => {
+    if( result && result.detail ==="Invalid token")
+      {
+       document.cookie.split(";").forEach((c) => {
+ 
+         document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+   
+       });
+   
+       window.location.href = "/login";  // Redirect to login page
+      }
+    
+    setResult(result)})
   .catch((error) => console.error(error));
         // setResult({"result":"result _______"})
    
@@ -84,30 +169,82 @@ import { redirect } from "react-router-dom";
     else if (selectedOption=="ip_finder")
         {
             console.log("ip_finder")
-            const requestOptions = {method:"GET", redirect:"follow"}
-            fetch(config.GETIPFINDERURL+domain, requestOptions)
+            const requestOptions = {method:"GET",headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token here
+            }, redirect:"follow"}
+            fetch(config.GET_IP_FINDER_URL+domain, requestOptions)
       .then((response) => response.json())
-      .then((result) => setResult(result))
+      .then((result) =>
+        { 
+          
+          if( result && result.detail ==="Invalid token")
+            {
+             document.cookie.split(";").forEach((c) => {
+       
+               document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+         
+             });
+         
+             window.location.href = "/login";  // Redirect to login page
+            }
+          
+          
+          setResult(result)})
       .catch((error) => console.error(error));
     
         }
         else if (selectedOption=="mx_record")
             {
                 console.log("mx_record")
-                const requestOptions = {method:"GET", redirect:"follow"}
-                fetch(config.GETMXRECORDURL+domain, requestOptions)
+                const requestOptions = {method:"GET",headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token here
+                }, redirect:"follow"}
+                fetch(config.GET_MX_RECORD_URL+domain, requestOptions)
           .then((response) => response.json())
-          .then((result) => setResult(result))
+          .then((result) => {
+
+            if( result && result.detail ==="Invalid token")
+              {
+               document.cookie.split(";").forEach((c) => {
+         
+                 document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+           
+               });
+           
+               window.location.href = "/login";  // Redirect to login page
+              }
+            
+            setResult(result)}
+          )
           .catch((error) => console.error(error));
         
             }
             else if (selectedOption=="register_score")
                 {
                     console.log("register_score")
-                    const requestOptions = {method:"GET", redirect:"follow"}
-                    fetch(config.GETREGISTERSCOREURL+domain, requestOptions)
+                    const requestOptions = {method:"GET",headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${cookieData.access_token}`, // Add Bearer token here
+                    }, redirect:"follow"}
+                    fetch(config.GET_REGISTER_SCORE_URL+domain, requestOptions)
               .then((response) => response.json())
-              .then((result) => setResult(result))
+              .then((result) => 
+                
+                {
+                  if( result && result.detail ==="Invalid token")
+                    {
+                     document.cookie.split(";").forEach((c) => {
+               
+                       document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+                 
+                     });
+                 
+                     window.location.href = "/login";  // Redirect to login page
+                    }
+                  setResult(result)
+                })
               .catch((error) => console.error(error));
    
                 }

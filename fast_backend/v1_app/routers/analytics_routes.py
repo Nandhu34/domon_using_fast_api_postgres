@@ -5,13 +5,11 @@ from  ..request_validators.analytics_validators import *
 from fastapi.responses import JSONResponse
 from ..views.analytics_view import  *
 
-from ..middleware.role_verification import validate_token_and_role
 
 analytics_routes = APIRouter()
 
 
 
-# dependencies=[Depends(validate_token_and_role("admin"))]
 @analytics_routes.post('/get_analytics')
 # body:ValidateGetAnalysis,  
 def get_result_from_backend(

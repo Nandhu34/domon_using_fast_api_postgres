@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+
 const globalErrorHandler = axios.create({
   baseURL: "https://localhost:8000", // Replace with your API base URL
   withCredentials: true, // If using cookies for authentication

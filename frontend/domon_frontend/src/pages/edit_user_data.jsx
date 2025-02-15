@@ -3,7 +3,7 @@ import config from "../config";
 import Header from "./header";
 import { redirect } from "react-router-dom";
 import Cookies from 'js-cookie'
-import globalErrorHandler from "../global_error_handler";
+import globalErrorHandler from "../global_error_handler.js";
 
 
 function EditUser() {
@@ -25,15 +25,29 @@ function EditUser() {
             const url = config.UPDATE_USER_DETAILS_URL + `?email=${cookieData.email}&role=${cookieData.role}`
             const requestOptions = {
                 method: "GET",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json" , 
+                    "Authorization": `Bearer ${cookieData.access_token}`,
+       
+                },
                 // body:JSON.stringify({}),
                 redirect: "follow"
             }
             console.log(url, requestOptions)
             console.log(" calling api ")
             const response = await fetch(url, requestOptions)
-
+            
             const result = await response.json()
+            if( result && result.detail ==="Invalid token")
+                {
+                 document.cookie.split(";").forEach((c) => {
+           
+                   document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+             
+                 });
+             
+                 window.location.href = "/login";  // Redirect to login page
+                }
+              
             setUserData(result.data)
 
             console.log(result)

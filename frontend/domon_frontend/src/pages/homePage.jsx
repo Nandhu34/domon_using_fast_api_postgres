@@ -32,11 +32,12 @@ function HomePage() {
 
   const confirmDeleteAccount = async () => {
     try {
-      const url = config.DELETE_USER_ACCOUNT
+      const url = config.DELETE_USER_ACCOUNT_URL
       const response = await fetch(url, {
         method: "DELETE",
       
-        headers:{"Content-Type":"application/json"},
+        headers:{"Content-Type":"application/json",    "Authorization": `Bearer ${cookieData.access_token}`,
+      },
         body:JSON.stringify({"email":cookieData.email, "role":cookieData.role})
       });
 

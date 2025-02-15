@@ -16,6 +16,9 @@ function PieChartResult() {
         const url = config.GET_KEYWORDS_RESULT_CHART_URL + cookieData.email
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        
+          myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
+          
 
         const raw = JSON.stringify({});
 
@@ -27,7 +30,20 @@ function PieChartResult() {
         };
         console.log(requestOptions)
         console.log(url)
-        fetch(url, requestOptions).then((response) => response.json()).then((result) => setpayloadForChart(result?.result)).catch((error) => console.error(error))
+        fetch(url, requestOptions).then((response) => response.json()).then((result) => {
+            
+            if( result && result.detail ==="Invalid token")
+                {
+                 document.cookie.split(";").forEach((c) => {
+           
+                   document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+             
+                 });
+             
+                 window.location.href = "/login";  // Redirect to login page
+                }
+            
+            setpayloadForChart(result?.result)}).catch((error) => console.error(error))
 
 
 
@@ -86,6 +102,8 @@ function ChartDomainExpity() {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
+        myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
+        
         const requestOptions = {
             method: "GET",
             headers: myHeaders,
@@ -97,6 +115,16 @@ function ChartDomainExpity() {
         try {
             const response = await fetch(url, requestOptions);
             const result = await response.json();
+            if( result && result.detail ==="Invalid token")
+                {
+                 document.cookie.split(";").forEach((c) => {
+           
+                   document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+             
+                 });
+             
+                 window.location.href = "/login";  // Redirect to login page
+                }
             console.log(result, "res");
             setApiResposne(result?.result)
         } catch (error) {
@@ -177,6 +205,8 @@ const makeApiCall=async()=>
     const myHeaders = new Headers()
     myHeaders .append("Content-Type", "application/json");
 
+    myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
+        
     const requestOptions ={
         method:"GET",
         headers:myHeaders,
@@ -186,6 +216,16 @@ const makeApiCall=async()=>
 
     const response =  await fetch(url , requestOptions )
     const result = await response.json()
+    if( result && result.detail ==="Invalid token")
+        {
+         document.cookie.split(";").forEach((c) => {
+   
+           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+     
+         });
+     
+         window.location.href = "/login";  // Redirect to login page
+        }
     console.log(result ," hx")
     console.log(result.result)
     setData(result.result)

@@ -99,6 +99,7 @@ def get_analytics_view(selected_option, keyword_list, start_date, end_date, emai
         result.append(doc)
 
     return result
+    # return ({"detail":"Invalid token"})
 
 def get_all_keywords_view(email):
     # return "hihi"

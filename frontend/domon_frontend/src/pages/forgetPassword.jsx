@@ -43,7 +43,7 @@ function  ForgetPassword()
         redirect: "follow"
         };
 
-        fetch(config.FORGETPADDWORDURL, requestOptions)
+        fetch(config.FORGET_PADDWORD_URL, requestOptions)
         .then((response) => response.json())
         .then((result) => setResponseMessage(result))
         .catch((error) => console.error(error));

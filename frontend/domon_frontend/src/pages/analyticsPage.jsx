@@ -9,7 +9,7 @@ import { Card, Typography } from "@material-tailwind/react";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./pieChartPage";
-import globalErrorHandler from "../global_error_handler";
+import globalErrorHandler from "../global_error_handler.js";
 function GetAnalytics() {
   const [pagginationStartNo, setPagginationPageNo] = useState(1);
   const [pagginationResultsPerPage, setPagginationresultsPerPage] = useState(10);
@@ -48,6 +48,7 @@ function GetAnalytics() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookieData.access_token}`,
         },
         body: JSON.stringify({}),
         redirect: "follow",
@@ -57,6 +58,16 @@ function GetAnalytics() {
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
   
       const result = await response.json();
+      if( result && result.detail ==="Invalid token")
+        {
+         document.cookie.split(";").forEach((c) => {
+   
+           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+     
+         });
+     
+         window.location.href = "/login";  // Redirect to login page
+        }
       console.log("Result:", result);
       setOptions(result);
     } catch (error) {
@@ -93,12 +104,24 @@ function GetAnalytics() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookieData.access_token}`,
+       
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
       console.log("Response Data:", data);
+     if( data && data.detail ==="Invalid token")
+     {
+      document.cookie.split(";").forEach((c) => {
+
+        document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+  
+      });
+  
+      window.location.href = "/login";  // Redirect to login page
+     }
       setResponseFromApi(data);
     } catch (error) {
       console.error("Error fetching data:", error);

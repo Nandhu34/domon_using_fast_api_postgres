@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import WhoisResult from "./WhoisResult"; // Import the result component
 import WhoisDisplay from "./whoisDataDisplay";
 import config from "../config";
-
+import cookieData from "./getCookie.js";
 
 function WhoisSearch() {
   const [domain, setDomain] = useState("");
@@ -21,8 +21,30 @@ function WhoisSearch() {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await fetch(config.GETWHOISURL+domain);
+      console.log(" getting who is ")
+      console.log(cookieData)
+      console.log(cookieData.access_token)
+      const response = await fetch(config.GET_WHOIS_URL + domain, {
+        method: "GET", // Specify the method
+        headers: {
+            "Authorization": `Bearer ${cookieData.access_token}`,
+            "Content-Type": "application/json" // Include Content-Type if needed
+        }
+    }); // Correct closing bracket
+    
       const data = await response.json();
+      if( data && data.detail ==="Invalid token")
+        {
+         document.cookie.split(";").forEach((c) => {
+   
+           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+     
+         });
+     
+         window.location.href = "/login";  // Redirect to login page
+        }
+     
+      console.log(data)
       setWhoisData(data);
     } catch (error) {
       console.error("Error fetching WHOIS data:", error);

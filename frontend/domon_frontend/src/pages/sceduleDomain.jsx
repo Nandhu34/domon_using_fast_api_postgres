@@ -41,13 +41,15 @@ const [reloadData, setReloadData]=useState(false)
 
 
   
-      const scheduledDomainsUrl= config.GET_SCHEDULED_DOMAINS+"page_no="+scheduledPagination+'&no_of_results='+noOfPagesPerPage
-      const  expiryScheduledDomainsUrl=config.GET_EXPIRY_SCHEDULED_DOMAINS+"page_no="+expirationPagination+'&no_of_results='+noOfPagesPerPage
-    console.log(config.GET_SCHEDULED_DOMAINS+"page_no="+scheduledPagination+'&no_of_results='+noOfPagesPerPage)
-    console.log(config.GET_EXPIRY_SCHEDULED_DOMAINS+"page_no="+expirationPagination+'&no_of_results='+noOfPagesPerPage)
+      const scheduledDomainsUrl= config.GET_SCHEDULED_DOMAINS_URL+"page_no="+scheduledPagination+'&no_of_results='+noOfPagesPerPage
+      const  expiryScheduledDomainsUrl=config.GET_EXPIRY_SCHEDULED_DOMAINS_URL+"page_no="+expirationPagination+'&no_of_results='+noOfPagesPerPage
+    console.log(config.GET_SCHEDULED_DOMAINS_URL+"page_no="+scheduledPagination+'&no_of_results='+noOfPagesPerPage)
+    console.log(config.GET_EXPIRY_SCHEDULED_DOMAINS_URL+"page_no="+expirationPagination+'&no_of_results='+noOfPagesPerPage)
           const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
+            myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
+        
             const raw = JSON.stringify({
               "email": cookieData.email
             });
@@ -61,7 +63,21 @@ const [reloadData, setReloadData]=useState(false)
             console.log(" rescgheduling ")
             fetch(scheduledDomainsUrl, requestOptions)
               .then((response) => response.json())
-              .then((result) => {console.log(result);setBackendScheduledDomains(result)})
+              .then((result) => {
+                
+                if( result && result.detail ==="Invalid token")
+                  {
+                   document.cookie.split(";").forEach((c) => {
+             
+                     document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+               
+                   });
+               
+                   window.location.href = "/login";  // Redirect to login page
+                  }
+
+                
+                console.log(result);setBackendScheduledDomains(result)})
               .catch((error) => console.error(error));
     
               fetch(expiryScheduledDomainsUrl, requestOptions)
@@ -122,7 +138,8 @@ const [reloadData, setReloadData]=useState(false)
      console.log(payload)
      try 
      {
-      const response = await  fetch(config.INSERTSCEDULEDOMAIN , {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)})
+      const response = await  fetch(config.INSERT_SCEDULE_DOMAIN_URL , {method:"POST", headers:{"Content-Type":"application/json", "Authorization": `Bearer ${cookieData.access_token}`// Add Bearer token here
+        }, body:JSON.stringify(payload)})
 
     if(!response.ok)
     {
@@ -131,6 +148,16 @@ const [reloadData, setReloadData]=useState(false)
 
     }
     const data = await response.json();
+    if( data && data.detail ==="Invalid token")
+      {
+       document.cookie.split(";").forEach((c) => {
+ 
+         document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+   
+       });
+   
+       window.location.href = "/login";  // Redirect to login page
+      }
     console.log(data,"data ")
     setApiResponse(data)
     getInitialDataFromBackend()
@@ -154,8 +181,20 @@ const [reloadData, setReloadData]=useState(false)
     try 
     {
 
-      const response =await  fetch (config.INSERTEXPIRATIONSCEDULEDDOMAIN,{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify({"email":cookieData.email, "domain_name":expirationDomains})})
+      console.log(" sceduling domain expiry ")
+
+      const response =await  fetch (config.INSERT_EXPIRATION_SCEDULED_DOMAIN,{method:"POST",headers:{"Content-Type":"application/json","Authorization":`Bearer ${cookieData.access_token}`}, body:JSON.stringify({"email":cookieData.email, "domain_name":expirationDomains})})
       const res = await response.json()
+      if( res && res.detail ==="Invalid token")
+        {
+         document.cookie.split(";").forEach((c) => {
+   
+           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+     
+         });
+     
+         window.location.href = "/login";  // Redirect to login page
+        }
       setApiResponseExpiry(res)
 
 
@@ -177,7 +216,9 @@ const [reloadData, setReloadData]=useState(false)
 
     fetch(config.UPDATE_DOMAIN_SCHEDULE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookieData.access_token}`// Add Bearer token here
+       },
       body: JSON.stringify({
         email: cookieData.email,
         domain_name: oldDomain,
@@ -185,7 +226,21 @@ const [reloadData, setReloadData]=useState(false)
       }),
     })
       .then((response) => response.json())
-      .then((result) => setApiResponse(result))
+      .then((result) => {
+
+        if( result && result.detail ==="Invalid token")
+          {
+           document.cookie.split(";").forEach((c) => {
+     
+             document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+       
+           });
+       
+           window.location.href = "/login";  // Redirect to login page
+          }
+        
+        
+        setApiResponse(result)})
       .catch((error) => console.error(error));
     
     setEditPopup(null);
@@ -204,7 +259,8 @@ const [reloadData, setReloadData]=useState(false)
 
     fetch(config.UPDATE_DOMAIN_EXPIRY_SCHEDULE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" , "Authorization":`Bearer ${cookieData.access_token}`}// Add Bearer token here
+      ,
       body: JSON.stringify({
         email: cookieData.email,
         domain_name: oldDomain,
@@ -212,7 +268,22 @@ const [reloadData, setReloadData]=useState(false)
       }),
     })
       .then((response) => response.json())
-      .then((result) => setApiResponseExpiry(result))
+      .then((result) =>{
+
+        if( result && result.detail ==="Invalid token")
+          {
+           document.cookie.split(";").forEach((c) => {
+     
+             document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+       
+           });
+       
+           window.location.href = "/login";  // Redirect to login page
+          }
+       
+
+       setApiResponseExpiry(result)
+  })
       .catch((error) => console.error(error));
     
     setEditExpiryPopup(null);
@@ -229,6 +300,7 @@ const [reloadData, setReloadData]=useState(false)
     
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+      myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
     
       const raw = JSON.stringify({
         email: cookieData.email,
@@ -245,6 +317,17 @@ const [reloadData, setReloadData]=useState(false)
       try {
         const response = await fetch(endpoint, requestOptions);
         const result = await response.json();
+        if( result && result.detail ==="Invalid token")
+          {
+           document.cookie.split(";").forEach((c) => {
+     
+             document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+       
+           });
+       
+           window.location.href = "/login";  // Redirect to login page
+          }
+       
         setApiResponse(result)
         if (response.ok) {
           console.log(`Action successful: ${result}`);
@@ -272,6 +355,8 @@ const handleUnpauseDomainExpiry = (domain_name) => handleDomainAction(domain_nam
     const myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
+myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
+        
 const raw = JSON.stringify({
   "email": cookieData.email,
   "domain_name": domainName
@@ -286,7 +371,20 @@ const requestOptions = {
 
 fetch(config.DELETE_SCHEDULED_DOMAIN_URL, requestOptions)
   .then((response) => response.json())
-  .then((result) => setApiResponse(result))
+  .then((result) =>{
+    if( result && result.detail ==="Invalid token")
+      {
+       document.cookie.split(";").forEach((c) => {
+ 
+         document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+   
+       });
+   
+       window.location.href = "/login";  // Redirect to login page
+      }
+   
+    
+    setApiResponse(result)})
   .catch((error) => console.error(error));
   getInitialDataFromBackend();
     };
@@ -295,6 +393,9 @@ fetch(config.DELETE_SCHEDULED_DOMAIN_URL, requestOptions)
 
     const myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
+
+myHeaders.append(  "Authorization", `Bearer ${cookieData.access_token}`)// Add Bearer token here
+        
 
 const raw = JSON.stringify({
   "email": cookieData.email,
@@ -310,7 +411,21 @@ const requestOptions = {
 
 fetch(config.DELETE_EXPIRY_SCHEDULED_DOMAIN_URL, requestOptions)
   .then((response) => response.json())
-  .then((result) => setApiResponseExpiry(result))
+  .then((result) => {
+    
+    if( result && result.detail ==="Invalid token")
+      {
+       document.cookie.split(";").forEach((c) => {
+ 
+         document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+   
+       });
+   
+       window.location.href = "/login";  // Redirect to login page
+      }
+   
+   
+      setApiResponseExpiry(result)})
   .catch((error) => console.error(error));
   getInitialDataFromBackend();
      };

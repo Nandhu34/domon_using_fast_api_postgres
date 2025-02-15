@@ -70,7 +70,7 @@ function ResetPassword()
         redirect: "follow"
         };
 
-        fetch(`${config.RESETPASSWORDTOKEN}${token}`, requestOptions)
+        fetch(`${config.RESET_PASSWORD_TOKEN}${token}`, requestOptions)
         .then((response) => response.json())
         .then((result) => {setResponseMessage(result); console.log(result)})
         .catch((error) => console.error(error));
