@@ -3,13 +3,14 @@ import WhoisResult from "./WhoisResult"; // Import the result component
 import WhoisDisplay from "./whoisDataDisplay";
 import config from "../config";
 import cookieData from "./getCookie.js";
-
+import Cookies from 'js-cookie'
 function WhoisSearch() {
   const [domain, setDomain] = useState("");
   const [whoisData, setWhoisData] = useState({});
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  
+  let cookieData = Cookies.get(config.COOKIENAME)
+    cookieData = cookieData ? JSON.parse(cookieData) : null
   useEffect(() => {
     if (whoisData?.status === "failure") {
       const timer = setTimeout(() => {

@@ -126,7 +126,7 @@ useEffect(() => {
                     text-gray-800 appearance-none 
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200" required onChange={(e)=>{setRole(e.target.value)}}>
-                    <option value="admin">admin</option>
+                    {/* <option value="admin">admin</option> */}
                     <option value="user">user</option>
                     {/* <option value="superuser">Super User</option> */}
                 </select>
