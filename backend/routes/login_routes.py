@@ -7,7 +7,7 @@ from models.db_initialiation import user_details_collection
 from helpers.get_auth_token_data import get_auth_and_decode_data
 import datetime
 
-
+from validators.auth_validators import register_validator
 
 login_blueprint = Blueprint('login_route',__name__)
 
