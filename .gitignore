@@ -2,7 +2,7 @@ domon/backend/config.py
 
 domon/fast_backend/config.py
 
-domon/frontend/domon_frontend/src/config.js
+# domon/frontend/domon_frontend/src/config.js
 
 **/config.js
 
@@ -23,3 +23,17 @@ fast_backend/domain_expiry_script/config.py
 
 fast_backend/domain_script/config.py
 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.env
+env/
+venv/
+domon_environment/
+.idea/
+*.log
+**/venv
+**/my_env

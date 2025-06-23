@@ -61,4 +61,4 @@ app.include_router(analytics_routes, prefix="/v1/analytics", tags=["analytics "]
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0" , port=8000, reload=True)
