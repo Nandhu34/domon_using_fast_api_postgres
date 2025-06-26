@@ -6,9 +6,11 @@ import whois
 from time import sleep 
 from parse_whois_data import parse_whois_with_module
 from generate_report import generate_pdf
+import sys 
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import config 
 import datetime
-
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -47,7 +49,12 @@ def check_update_expiration_date(domains_to_check):
 
                 expiration_date = collected_whois_data['expiration_date']
                 expiry_in_whois = collected_whois_data['expiration_date'] 
-                date_1 = datetime.datetime.strptime(expiry_in_whois,"%Y-%m-%d %H:%M:%S")
+                try:
+                        
+                    date_1 = datetime.datetime.strptime(expiry_in_whois,"%Y-%m-%d %H:%M:%S")
+                except :
+                    date_1 = datetime.datetime.strptime(expiry_in_whois, "%Y-%m-%d %H:%M:%S.%f")
+
                 time_to_alarm = date_1 - datetime.timedelta(days=60)
                 print(time_to_alarm,"alarm date")
                 schema_data = { "email":email, "domain_name":collected_whois_data['domain_name'], "whois_result":collected_whois_data,"date_of_collection":datetime.datetime.now().isoformat() , "schedule_type":"domain_expiry", "expiry_date":collected_whois_data['expiration_date']}

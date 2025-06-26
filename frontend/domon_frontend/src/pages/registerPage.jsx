@@ -225,11 +225,12 @@ fetch(config.REGISTER_BACKEND_URL, requestOptions)
           <b style={{ textAlign: "center" }}>
             <i><u>Register New User</u></i>
           </b>
-
+          
           <div className="email_div">
             <input
             required
               type="email"
+              style={{width:"400px", height:"50px"}}
               onChange={(e) => setEmail(e.target.value)}
               value={Email}
               placeholder="Enter your Email"

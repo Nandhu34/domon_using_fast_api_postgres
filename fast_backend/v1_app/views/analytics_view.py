@@ -125,9 +125,34 @@ def get_all_keywords_view(email):
     }
 
 ]
+#     agg_qwery=[
+#     {
+#         '$match': {
+#             'email': email
+#         }
+#     }, {
+#         '$group': {
+#             '_id': {
+#                 'email': '$email'
+#             }, 
+#             'total_keywords': {
+#                 '$addToSet': {'$first':'$schedule_list.domain_name'}
+#             }
+#         }
+#     }, {
+#         '$project': {
+#             '_id': 0, 
+#             'total_keywords': 1
+#         }
+#     }
+
+# ]
+    print(agg_qwery)
 
     result = list(collected_whois_data_coll.aggregate(agg_qwery))
     print(result )
+    if result ==[]:
+        return []
     options = []
     for i in result[0]['total_keywords'] :
             temp_option={}

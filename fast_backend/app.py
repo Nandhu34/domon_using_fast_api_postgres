@@ -12,17 +12,27 @@ from contextlib import asynccontextmanager
 # from ..middleware.role_verification import validate_token_and_role
 from  middleware import validate_token_and_role
 # from ..fast_backend.v1_app.middleware.role_verification import validate_token_and_role
-
+from pathlib import Path
 import datetime 
+import platform
 import os
 def run_daily_task():
-    print(f"Running daily task at {datetime.datetime.now()}...")
-    os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_script/domain_imperation_process.py")
-    os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_expiry_script/domain_expiration_check.py")
+    # from run_all_tasks import main
+    # main()
+    base_dir = Path(__file__).resolve().parent
+
+    script_1 = base_dir / "domain_script" / "domain_imperation_process.py"
+    script_2 = base_dir / "domain_expiry_script" / "domain_expiration_check.py"
+    python_cmd = "python3" if platform.system() != "Windows" else "python"
+    os.system(f"{python_cmd} {script_1}")
+    os.system(f"{python_cmd} {script_2}")
+    # print(f"Running daily task at {datetime.datetime.now()}...")
+    # os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_script/domain_imperation_process.py")
+    # os.system("python3 /home/nandhakumar/work_space/final_code/domon/fast_backend/domain_expiry_script/domain_expiration_check.py")
 
 # Scheduler instance  minutes days
 scheduler = BackgroundScheduler()
-scheduler.add_job(run_daily_task, "interval", days=7)  # Runs once every 24 hours
+scheduler.add_job(run_daily_task, "interval", hours=2)  # Runs once every 24 hours
 
 # Use FastAPI's lifespan event for proper startup/shutdown
 @asynccontextmanager

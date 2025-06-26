@@ -1,7 +1,7 @@
 import jwt
 import datetime 
 import config 
-from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
+from jwt import ExpiredSignatureError, InvalidTokenError
 from ..logger_setup.logger  import get_logger 
 
 auth_logger = get_logger('auth_token')

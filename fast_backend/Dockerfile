@@ -1,5 +1,5 @@
 # Use Python base image
-FROM python:3.9
+FROM python:3.12.7
 
 # Set working directory
 WORKDIR /code
