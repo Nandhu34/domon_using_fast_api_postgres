@@ -32,7 +32,7 @@ def run_daily_task():
 
 # Scheduler instance  minutes days
 scheduler = BackgroundScheduler()
-scheduler.add_job(run_daily_task, "interval", hours=2)  # Runs once every 24 hours
+scheduler.add_job(run_daily_task, "interval", days=2)  # Runs once every 24 hours
 
 # Use FastAPI's lifespan event for proper startup/shutdown
 @asynccontextmanager

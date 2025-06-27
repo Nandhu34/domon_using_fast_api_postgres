@@ -24,7 +24,7 @@ function GetAnalytics() {
 
   // Schedule types
   const scheduleType = ["domain", "domain_expiry"];
-  const [options,setOptions]=useState([])
+  const [options, setOptions] = useState([])
   // Options for MultiSelect
   // const options = [
   //   { name: "All", code: "all" },
@@ -40,10 +40,10 @@ function GetAnalytics() {
     setStartDate("");
     setEndDate("");
   };
-  const getAllKeywords = async () => {  
+  const getAllKeywords = async () => {
     try {
       const url = config.GET_ALL_KEYWORDS_URL + cookieData.email;
-  
+
       const requestOptions = {
         method: "POST",
         headers: {
@@ -53,28 +53,27 @@ function GetAnalytics() {
         body: JSON.stringify({}),
         redirect: "follow",
       };
-  
+
       const response = await fetch(url, requestOptions);
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-  
+
       const result = await response.json();
-      if( result && result.detail ==="Invalid token")
-        {
-         document.cookie.split(";").forEach((c) => {
-   
-           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
-     
-         });
-     
-         window.location.href = "/login";  // Redirect to login page
-        }
+      if (result && result.detail === "Invalid token") {
+        document.cookie.split(";").forEach((c) => {
+
+          document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+
+        });
+
+        window.location.href = "/login";  // Redirect to login page
+      }
       console.log("Result:", result);
       setOptions(result);
     } catch (error) {
       console.error("Error fetching keywords:", error);
     }
   };
-  
+
   const HandleFilterButton = async () => {
     let arraySelectedKeywordValue = [];
     if (selectedKeywordsFilter) {
@@ -105,38 +104,36 @@ function GetAnalytics() {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${cookieData.access_token}`,
-       
+
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
       console.log("Response Data:", data);
-     if( data && data.detail ==="Invalid token")
-     {
-      document.cookie.split(";").forEach((c) => {
+      if (data && data.detail === "Invalid token") {
+        document.cookie.split(";").forEach((c) => {
 
-        document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
-  
-      });
-  
-      window.location.href = "/login";  // Redirect to login page
-     }
+          document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+
+        });
+
+        window.location.href = "/login";  // Redirect to login page
+      }
       setResponseFromApi(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  useEffect(()=>
-  {
+  useEffect(() => {
     getAllKeywords();
     HandleFilterButton();
   }, [])
 
   return (
     <>
-      <div className="flex justify-end gap-20 p-6  flex-wrap">
+      <div className="flex justify-between gap-20 p-6 flex-nowrap">
         {/* Schedule Type Dropdown */}
         <div className="flex flex-col items-center gap-2 ">
           <p> Select Type </p>
@@ -158,14 +155,14 @@ function GetAnalytics() {
         <div className="flex flex-col items-center gap-2">
           <p> select Keywords </p>
           <MultiSelect
-  value={selectedKeywordsFilter}
-  onChange={(e) => setSelectedKeywordFilter(e.value)}
-  options={options}
-  optionLabel="name"
-  placeholder="Select Domains"
-  maxSelectedLabels={3}
-  className="w-[20rem] h-[3rem] border border-gray-400 rounded-md "
-/>
+            value={selectedKeywordsFilter}
+            onChange={(e) => setSelectedKeywordFilter(e.value)}
+            options={options}
+            optionLabel="name"
+            placeholder="Select Domains"
+            maxSelectedLabels={3}
+            className="w-[20rem] h-[3rem] border border-gray-400 rounded-md "
+          />
 
         </div>
 
@@ -195,28 +192,29 @@ function GetAnalytics() {
         {/* Buttons */}
         <div>
 
-        <button
-          className="px-4 py-2 mt-8 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600"
-          onClick={clearAllFilters}
-        >
-          Clear All Filters
-        </button>
+          <button
+            className="px-4 py-2 mt-8 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600"
+            onClick={clearAllFilters}
+          >
+            Clear All Filters
+          </button>
 
 
         </div>
-        
+
         <div>
 
-        
-        <button  className=" pr-10 px-4 py-2 mt-8 bg-green-500 text-white rounded-lg shadow-md hover:bg-red-600" onClick={HandleFilterButton}>Apply</button>
-     
+
+          <button className=" pr-10 px-4 py-2 mt-8 bg-green-500 text-white rounded-lg shadow-md hover:bg-red-600" onClick={HandleFilterButton}>Apply</button>
+
         </div>
-        
-         </div>
 
-    <hr />
+      </div>
 
-          {responseFromApi && <DisplayAnalyticsData responseFromApi={responseFromApi} />}
+      <hr />
+      {/* <div className="w-full px-4 mt-8 bg-white shadow-lg rounded-xl border isolate"> */}
+      <DisplayAnalyticsData responseFromApi={responseFromApi} />
+      {/* </div> */}
 
 
 
@@ -276,36 +274,35 @@ function DisplayAnalyticsData({ responseFromApi }) {
   return (
     <div>
       <div className="flex gap-20 pl-20 pt-4">
-        <a
-          onClick={() => {
-            setSelectedSubMenu('domain');
-          }}
-          className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${
-            selectedSubMenu === 'domain' ? 'underline underline-offset-8 text-green-600' : ''
-          }`}
-        >
-          Domain
-        </a>
-        <a
-          onClick={() => {
-            setSelectedSubMenu('domain_expiry');
-          }}
-          className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${
-            selectedSubMenu === 'domain_expiry' ? 'underline underline-offset-8 text-green-600' : ''
-          }`}
-        >
-          Domain Expiry
-        </a>
-        <a
-          onClick={() => {
-            setSelectedSubMenu('analytics');
-          }}
-          className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${
-            selectedSubMenu === 'analytics' ? 'underline underline-offset-8 text-green-600' : ''
-          }`}
-        >
-          analytics 
-        </a>
+        <div className="flex flex-wrap items-end justify-end gap-6">
+          <a
+            onClick={() => {
+              setSelectedSubMenu('domain');
+            }}
+            className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${selectedSubMenu === 'domain' ? 'underline underline-offset-8 text-green-600' : ''
+              }`}
+          >
+            Domain
+          </a>
+          <a
+            onClick={() => {
+              setSelectedSubMenu('domain_expiry');
+            }}
+            className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${selectedSubMenu === 'domain_expiry' ? 'underline underline-offset-8 text-green-600' : ''
+              }`}
+          >
+            Domain Expiry
+          </a>
+          <a
+            onClick={() => {
+              setSelectedSubMenu('analytics');
+            }}
+            className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${selectedSubMenu === 'analytics' ? 'underline underline-offset-8 text-green-600' : ''
+              }`}
+          >
+            analytics
+          </a>
+        </div>
       </div>
 
       <div>
@@ -315,7 +312,7 @@ function DisplayAnalyticsData({ responseFromApi }) {
               responseFromApi.map((key, index) => {
                 return (
                   <>
-                    {key?.schedule_type === 'domain' && (
+                    {/* {key?.schedule_type === 'domain' && (
                       <div key={index}>
                         <br />
                         <hr />
@@ -341,7 +338,39 @@ function DisplayAnalyticsData({ responseFromApi }) {
                           />
                         </div>
                       </div>
-                    )}
+                    )} */}
+                    {responseFromApi?.map((key, index) => {
+                      if (key?.schedule_type !== 'domain') return null;
+
+                      return (
+                        <div key={index}>
+                          <br />
+                          <hr />
+                          <div className="flex justify-around pt-5 bg-purple-400 text-white">
+                            <p>KEYWORD USED -- {key.keyword_used}</p>
+                            <br />
+                            <br />
+                          </div>
+
+                          <hr />
+                          {/* "max-h-[400px] overflow-auto" */}
+                          <div className="">
+                            <DataTable
+                              columns={columns}
+                              data={key.whois_result}
+                              expandableRows
+                              expandableRowsComponent={ExpandedComponent}
+                              pagination
+                              paginationPerPage={rowsPerPage}
+                              paginationPageNumber={currentPage}
+                              onChangePage={handlePageChange}
+                              onChangeRowsPerPage={handlePerPageChange}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+
                   </>
                 );
               })}
@@ -387,13 +416,13 @@ function DisplayAnalyticsData({ responseFromApi }) {
           </>
         )}
 
+        {selectedSubMenu === 'analytics' && (
 
-        {selectedSubMenu === 'analytics' && (<>
-        
-       <Dashboard />
-       
-         </>)}
-              
+          <Dashboard />
+
+        )}
+
+
       </div>
     </div>
   );
