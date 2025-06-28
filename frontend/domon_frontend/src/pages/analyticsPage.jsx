@@ -302,7 +302,7 @@ function DisplayAnalyticsData({ responseFromApi }) {
             className={`hover:underline hover:cursor-pointer hover:underline-offset-8 ${selectedSubMenu === 'analytics' ? 'underline underline-offset-8 text-green-600' : ''
               }`}
           >
-            analytics
+            Analytics
           </a>
         </div>
       </div>

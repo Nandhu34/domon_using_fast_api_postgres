@@ -51,7 +51,7 @@
 
 
 const BASE_BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://domonbackend-production.up.railway.app";
-const BASE_FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
+const BASE_FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL || "https://domonfrontend-production.up.railway.app";
 
 const config = {
   BASE_URL: BASE_FRONTEND_URL,
