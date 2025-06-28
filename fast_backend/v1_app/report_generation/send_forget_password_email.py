@@ -8,7 +8,8 @@ def send_reset_password_email(reset_password_token , to_email, role ):
     smtp_port = 587
     from_email = config.mail_sender_email
     password = config.mail_sender_password  # Use App Password or regular password if less secure apps are enabled
-    reset_url = f"http://localhost:3000/reset-password/{reset_password_token}"
+    print("config.frontend_url", config.frontend_url)
+    reset_url = f"{config.frontend_url}/reset-password/{reset_password_token}"
 
     body=f"""<html><body><p>Reset your password <a href="{reset_url}">here</a>.</p></body></html>"""
     msg = MIMEText(body)

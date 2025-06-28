@@ -22,7 +22,7 @@ exp_time_for_reset_password_token = 5
 mail_sender_email ="whoisdomon@gmail.com"
 mail_sender_password  ="asgs lkqx zxel jryy"
 api_to_check_daily_registered = "https://domains-monitor.com/api/v1/f7720204c540922374a6270c9c3e9603/dailyupdate/json/"
-
+frontend_url= "https://domonfrontend-production.up.railway.app"
 
 
 
