@@ -157,28 +157,33 @@ function ChartDomainExpity() {
             <hr className="mt-4 mb-6" />
             <div className="flex justify-center">
 
-                <ResponsiveContainer width="80%" height={400}   >
-                    <BarChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="expiry_range" />
-                        <YAxis />
-                        <Tooltip
-                            content={({ payload }) => {
-                                if (payload && payload.length) {
-                                    const { domain_names } = payload[0].payload;
-                                    return (
-                                        <div>
-                                            <strong>Domains:</strong> <br /> {domain_names}
-                                        </div>
-                                    );
-                                }
-                                return null;
-                            }}
-                        />
-                        <Legend />
-                        <Bar dataKey="count" fill="#8884d8" />
-                    </BarChart>
-                </ResponsiveContainer>
+                <div style={{ overflowX: 'auto', backgroundColor: 'white', padding: '1rem' }}>
+                    <div style={{ width: `${chartData.length * 100}px`, minWidth: '100%' }}>
+                        <ResponsiveContainer height={400}>
+                            <BarChart data={chartData}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="expiry_range" />
+                                <YAxis />
+                                <Tooltip
+                                    content={({ payload }) => {
+                                        if (payload && payload.length) {
+                                            const { domain_names } = payload[0].payload;
+                                            return (
+                                                <div>
+                                                    <strong>Domains:</strong> <br /> {domain_names}
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    }}
+                                />
+                                <Legend />
+                                <Bar dataKey="count" fill="#8884d8" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -268,14 +273,19 @@ function DomainImpersinationchart() {
                 <div className="w-2/3 h-96 bg-white p-4 shadow-lg rounded-lg mb-[300px]">
                     {/* <div className="w-2/3 min-h-[400px] bg-white p-4 shadow-lg rounded-lg"> */}
 
-                    <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={data}>
-                            <XAxis dataKey="_id" />
-                            <YAxis />
-                            <Tooltip content={<CustomTooltip />} />
-                            <Bar dataKey="count" fill="#8884d8" />
-                        </BarChart>
-                    </ResponsiveContainer>
+                    <div style={{ width: '100%', overflowX: 'auto' }}>
+                        <div style={{ width: `${data.length * 80}px`, minWidth: '600px', height: '400px' }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={data}>
+                                    <XAxis dataKey="_id" />
+                                    <YAxis />
+                                    <Tooltip content={<CustomTooltip />} />
+                                    <Bar dataKey="count" fill="#8884d8" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>);
