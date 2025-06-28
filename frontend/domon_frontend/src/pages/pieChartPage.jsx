@@ -157,32 +157,36 @@ function ChartDomainExpity() {
             <hr className="mt-4 mb-6" />
             <div className="flex justify-center">
 
-                <div style={{ overflowX: 'auto', backgroundColor: 'white', padding: '1rem' }}>
-                    <div style={{ width: `${chartData.length * 100}px`, minWidth: '100%' }}>
-                        <ResponsiveContainer height={400}>
-                            <BarChart data={chartData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="expiry_range" />
-                                <YAxis />
-                                <Tooltip
-                                    content={({ payload }) => {
-                                        if (payload && payload.length) {
-                                            const { domain_names } = payload[0].payload;
-                                            return (
-                                                <div>
-                                                    <strong>Domains:</strong> <br /> {domain_names}
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    }}
-                                />
-                                <Legend />
-                                <Bar dataKey="count" fill="#8884d8" />
-                            </BarChart>
-                        </ResponsiveContainer>
+                {Array.isArray(chartData) && chartData.length > 0 ? (
+                    <div style={{ overflowX: 'auto', backgroundColor: 'white', padding: '1rem' }}>
+                        <div style={{ width: `${Math.max(chartData.length * 100, 600)}px`, minWidth: '100%' }}>
+                            <ResponsiveContainer height={400}>
+                                <BarChart data={chartData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="expiry_range" />
+                                    <YAxis />
+                                    <Tooltip
+                                        content={({ payload }) => {
+                                            if (payload && payload.length) {
+                                                const { domain_names } = payload[0].payload;
+                                                return (
+                                                    <div>
+                                                        <strong>Domains:</strong> <br /> {domain_names}
+                                                    </div>
+                                                );
+                                            }
+                                            return null;
+                                        }}
+                                    />
+                                    <Legend />
+                                    <Bar dataKey="count" fill="#8884d8" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <div style={{ padding: '1rem', backgroundColor: 'white' }}>Loading or no data</div>
+                )}
 
 
             </div>
