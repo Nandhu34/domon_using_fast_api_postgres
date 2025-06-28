@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import Cookies from 'js-cookie';
-import config from "../config";
+import config from "../config_file";
 import { Cookie } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
 
@@ -262,12 +262,11 @@ function DomainImpersinationchart() {
             </h2>
             <br />
             <hr />
-            {/* <div className="flex justify-center items-center h-screen ">
-       */}
-            <div className="flex justify-center items-center min-h-[500px] py-10">
+            <div className="flex justify-center items-center h-screen ">
+                {/* <div className="flex justify-center items-center min-h-[500px] py-10"> */}
 
-                {/* <div className="w-2/3 h-96 bg-white p-4 shadow-lg rounded-lg mb-[300px]"> */}
-                <div className="w-2/3 min-h-[400px] bg-white p-4 shadow-lg rounded-lg">
+                <div className="w-2/3 h-96 bg-white p-4 shadow-lg rounded-lg mb-[300px]">
+                    {/* <div className="w-2/3 min-h-[400px] bg-white p-4 shadow-lg rounded-lg"> */}
 
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={data}>

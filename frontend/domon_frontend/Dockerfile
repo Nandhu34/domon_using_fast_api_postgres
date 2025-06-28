@@ -33,30 +33,24 @@
 # # Serve the built React application
 # CMD ["npx", "serve", "-s", "build", "-l", "3000"]
 
+FROM node:20
 
-# Use an official Node.js runtime as a base image
-FROM node:20-alpine
-
-# Set working directory
 WORKDIR /app
 
-# Copy only package files for layer caching
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm install --legacy-peer-deps
 
-# Copy the rest of the project
 COPY . .
 
-# Build the React application
+# Add build args and env
+ARG REACT_APP_BACKEND_URL
+ARG REACT_APP_FRONTEND_URL
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+ENV REACT_APP_FRONTEND_URL=$REACT_APP_FRONTEND_URL
+
 RUN npm run build
 
-# Install serve globally
 RUN npm install -g serve
-
-# Expose the port
 EXPOSE 3000
 
-# Serve the build directory
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD sh -c "serve -s build -l ${PORT:-3000}"

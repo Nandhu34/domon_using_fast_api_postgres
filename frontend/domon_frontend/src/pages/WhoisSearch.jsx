@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WhoisResult from "./WhoisResult"; // Import the result component
 import WhoisDisplay from "./whoisDataDisplay";
-import config from "../config";
+import config from "../config_file";
 import cookieData from "./getCookie.js";
 import Cookies from 'js-cookie'
 function WhoisSearch() {
@@ -10,7 +10,7 @@ function WhoisSearch() {
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   let cookieData = Cookies.get(config.COOKIENAME)
-    cookieData = cookieData ? JSON.parse(cookieData) : null
+  cookieData = cookieData ? JSON.parse(cookieData) : null
   useEffect(() => {
     if (whoisData?.status === "failure") {
       const timer = setTimeout(() => {
@@ -28,23 +28,22 @@ function WhoisSearch() {
       const response = await fetch(config.GET_WHOIS_URL + domain, {
         method: "GET", // Specify the method
         headers: {
-            "Authorization": `Bearer ${cookieData.access_token}`,
-            "Content-Type": "application/json" // Include Content-Type if needed
+          "Authorization": `Bearer ${cookieData.access_token}`,
+          "Content-Type": "application/json" // Include Content-Type if needed
         }
-    }); // Correct closing bracket
-    
+      }); // Correct closing bracket
+
       const data = await response.json();
-      if( data && data.detail ==="Invalid token")
-        {
-         document.cookie.split(";").forEach((c) => {
-   
-           document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
-     
-         });
-     
-         window.location.href = "/login";  // Redirect to login page
-        }
-     
+      if (data && data.detail === "Invalid token") {
+        document.cookie.split(";").forEach((c) => {
+
+          document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+
+        });
+
+        window.location.href = "/login";  // Redirect to login page
+      }
+
       console.log(data)
       setWhoisData(data);
     } catch (error) {
@@ -59,19 +58,19 @@ function WhoisSearch() {
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="bg-white p-10 shadow-lg rounded-lg max-w-4xl w-full">
           <h1 className="text-4xl font-bold text-gray-800 text-center mb-6">WHOIS Information Lookup</h1>
-          
+
           <p className="text-gray-600 mb-4">
             The WHOIS system is an integral part of the internet infrastructure. It allows users to query databases that store the registered users or assignees of a domain name, IP address, or an autonomous system. This information is crucial for a variety of purposes, including network administration, domain name management, and cybersecurity.
           </p>
-          
+
           <p className="text-gray-600 mb-4">
             By looking up WHOIS data, you can discover the registrant's name, address, phone number, email, and the domain's expiration date. This information can help identify ownership, detect fraudulent activities, and resolve domain disputes. It also plays a vital role in ensuring the accountability of domain registrations.
           </p>
-          
+
           <p className="text-gray-600 mb-8">
             WHOIS databases are maintained by domain registrars and the Internet Corporation for Assigned Names and Numbers (ICANN). They offer a transparent view into who is responsible for internet resources, which helps foster a safer and more secure internet.
           </p>
-          
+
           <div className="mt-10 text-center">
             {whoisData?.status === "success" && <WhoisDisplay whoisData={whoisData} />}
             {whoisData?.status === "failure" && (

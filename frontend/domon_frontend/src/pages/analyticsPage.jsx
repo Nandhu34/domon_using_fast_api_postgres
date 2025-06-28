@@ -3,7 +3,8 @@ import { MultiSelect } from "primereact/multiselect";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import config from "../config";
+import config from "../config_file.js";
+
 import Cookies from "js-cookie";
 import { Card, Typography } from "@material-tailwind/react";
 import DataTable from 'react-data-table-component';
@@ -133,12 +134,13 @@ function GetAnalytics() {
 
   return (
     <>
-      <div className="flex justify-between gap-20 p-6 flex-nowrap">
+      <div className="flex justify-between p-6 flex-nowrap">
         {/* Schedule Type Dropdown */}
         <div className="flex flex-col items-center gap-2 ">
           <p> Select Type </p>
           <select
-            className="rounded-lg border border-gray-300 p-2"
+            // className="rounded-lg border border-gray-300 p-2"
+            className="w-[20rem] h-[3rem] border border-gray-400 rounded-md "
             onChange={(e) => setSelectedScheduledType(e.target.value)}
             value={selectedScheduledType}
           >
@@ -153,7 +155,7 @@ function GetAnalytics() {
 
         {/* MultiSelect Dropdown */}
         <div className="flex flex-col items-center gap-2">
-          <p> select Keywords </p>
+          <p> Select Keywords </p>
           <MultiSelect
             value={selectedKeywordsFilter}
             onChange={(e) => setSelectedKeywordFilter(e.value)}
@@ -196,7 +198,7 @@ function GetAnalytics() {
             className="px-4 py-2 mt-8 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600"
             onClick={clearAllFilters}
           >
-            Clear All Filters
+            Clear All
           </button>
 
 
